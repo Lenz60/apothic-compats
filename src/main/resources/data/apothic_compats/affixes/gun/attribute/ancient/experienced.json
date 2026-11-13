@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"irons_artifice"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"attributeslib:experience_gained","operation":"MULTIPLY_TOTAL","values":{"ancientreforging:ancient":{"step":0.025,"min":0.65,"steps":10}},"types":["gun"]}

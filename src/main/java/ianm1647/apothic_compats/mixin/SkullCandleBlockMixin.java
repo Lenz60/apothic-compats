@@ -1,6 +1,6 @@
 package ianm1647.apothic_compats.mixin;
 
-import dev.shadowsoffire.apotheosis.ench.api.IEnchantingBlock;
+import dev.shadowsoffire.apothic_enchanting.api.EnchantmentStatBlock;
 import net.mehvahdjukaar.amendments.common.block.AbstractCandleSkullBlock;
 import net.mehvahdjukaar.amendments.common.tile.CandleSkullBlockTile;
 import net.minecraft.core.BlockPos;
@@ -13,7 +13,7 @@ import static net.minecraft.world.level.block.Blocks.WITHER_SKELETON_SKULL;
 import static net.minecraft.world.level.block.Blocks.WITHER_SKELETON_WALL_SKULL;
 
 @Mixin(value = AbstractCandleSkullBlock.class, remap = false)
-public abstract class SkullCandleBlockMixin extends AbstractCandleBlock implements IEnchantingBlock {
+public abstract class SkullCandleBlockMixin extends AbstractCandleBlock implements EnchantmentStatBlock {
 
     protected SkullCandleBlockMixin(Properties pProperties) {
         super(pProperties);

@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"attributeslib:current_hp_damage","operation":"ADDITION","values":{"ancientreforging:ancient":{"step":0.04,"min":0.3,"steps":10}},"types":["staff"]}

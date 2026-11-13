@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"}],"type":"apotheosis:attribute","attribute":"malum:charge_duration","operation":"MULTIPLY_TOTAL","values":{"common":-0.15,"uncommon":-0.2,"mythic":-0.5,"rare":-0.3,"epic":-0.4},"types":["staff"]}

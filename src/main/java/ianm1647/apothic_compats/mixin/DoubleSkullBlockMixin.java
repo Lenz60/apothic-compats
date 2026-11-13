@@ -1,6 +1,6 @@
 package ianm1647.apothic_compats.mixin;
 
-import dev.shadowsoffire.apotheosis.ench.api.IEnchantingBlock;
+import dev.shadowsoffire.apothic_enchanting.api.EnchantmentStatBlock;
 import net.mehvahdjukaar.amendments.common.block.DoubleSkullBlock;
 import net.mehvahdjukaar.amendments.common.tile.DoubleSkullBlockTile;
 import net.minecraft.core.BlockPos;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(value = DoubleSkullBlock.class, remap = false)
-public abstract class DoubleSkullBlockMixin extends SkullBlock implements IEnchantingBlock {
+public abstract class DoubleSkullBlockMixin extends SkullBlock implements EnchantmentStatBlock {
 
     protected DoubleSkullBlockMixin(Properties pProperties) {
         super(Types.SKELETON, pProperties);

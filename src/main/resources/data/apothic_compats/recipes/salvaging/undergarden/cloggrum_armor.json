@@ -1,1 +1,0 @@
-{"conditions":[{"type":"forge:mod_loaded","modid":"undergarden"}],"type":"apotheosis:salvaging","input":[{"item":"undergarden:cloggrum_helmet"},{"item":"undergarden:cloggrum_chestplate"},{"item":"undergarden:cloggrum_leggings"},{"item":"undergarden:cloggrum_boots"}],"outputs":[{"stack":{"count":1,"item":"undergarden:cloggrum_ingot"},"max_count":3,"min_count":1}]}

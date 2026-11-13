@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"irons_artifice"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"apothic_compats:gun_recoil","operation":"MULTIPLY_TOTAL","values":{"ancientreforging:ancient":-0.35},"types":["gun"]}

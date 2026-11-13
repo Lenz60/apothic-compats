@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"create"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:mob_effect","mob_effect":"apothic_attributes:sundering","target":"ARROW_TARGET","values":{"ancientreforging:ancient":{"duration":{"step":20,"min":160,"steps":8},"cooldown":30,"amplifier":0.0}},"types":["potato_cannon"]}

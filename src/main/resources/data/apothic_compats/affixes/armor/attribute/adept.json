@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"}],"type":"apotheosis:attribute","attribute":"lodestone:magic_proficiency","operation":"MULTIPLY_BASE","values":{"mythic":{"step":0.01,"min":0.5,"steps":10},"rare":{"step":0.01,"min":0.3,"steps":10},"epic":{"step":0.01,"min":0.4,"steps":10}},"types":["helmet","chestplate","leggings","boots"]}

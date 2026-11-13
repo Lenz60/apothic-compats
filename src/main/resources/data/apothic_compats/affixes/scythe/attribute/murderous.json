@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"}],"type":"apotheosis:attribute","attribute":"minecraft:generic.attack_damage","operation":"MULTIPLY_BASE","values":{"mythic":{"step":0.03,"min":0.25,"steps":10},"rare":{"step":0.028,"min":0.15,"steps":10},"epic":{"step":0.03,"min":0.18,"steps":10}},"types":["scythe"]}

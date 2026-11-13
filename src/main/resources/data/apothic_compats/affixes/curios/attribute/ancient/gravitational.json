@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"curios"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"minecraft:generic.gravity","operation":"MULTIPLY_TOTAL","values":{"ancientreforging:ancient":-0.07},"types":["back","belt","body","bracelet","charm","curio","feet","hands","head","necklace","ring"]}

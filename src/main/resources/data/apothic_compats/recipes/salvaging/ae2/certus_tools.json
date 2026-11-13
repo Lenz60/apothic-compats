@@ -1,1 +1,0 @@
-{"conditions":[{"type":"forge:mod_loaded","modid":"ae2"}],"type":"apotheosis:salvaging","input":[{"item":"ae2:certus_quartz_axe"},{"item":"ae2:certus_quartz_pickaxe"},{"item":"ae2:certus_quartz_shovel"},{"item":"ae2:certus_quartz_sword"},{"item":"ae2:certus_quartz_hoe"}],"outputs":[{"stack":{"count":1,"item":"ae2:certus_quartz_crystal"},"max_count":1,"min_count":0}]}

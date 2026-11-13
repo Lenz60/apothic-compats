@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:festive","types":["scythe"],"values":{"ancientreforging:ancient":{"step":0.005,"min":0.05,"steps":14}}}

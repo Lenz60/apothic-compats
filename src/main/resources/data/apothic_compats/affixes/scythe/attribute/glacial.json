@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"}],"type":"apotheosis:attribute","attribute":"attributeslib:cold_damage","operation":"ADDITION","values":{"mythic":{"step":0.25,"min":4,"steps":24},"uncommon":{"step":0.25,"min":2,"steps":8},"rare":{"step":0.25,"min":2,"steps":12},"epic":{"step":0.25,"min":4,"steps":8}},"types":["scythe"]}

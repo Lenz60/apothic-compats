@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"create"}],"type":"apotheosis:attribute","attribute":"attributeslib:prot_shred","operation":"ADDITION","values":{"mythic":{"step":0.004545,"min":0.15,"steps":11},"rare":{"step":0.005,"min":0.1,"steps":10},"epic":{"step":0.005,"min":0.125,"steps":10}},"types":["potato_cannon"]}

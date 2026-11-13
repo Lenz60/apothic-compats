@@ -79,11 +79,7 @@ dependencies {
     implementation fg.deobf("maven.modrinth:irons-artifice:$artifice_version")
 
     // runtime helpers for local testing
-    implementation fg.deobf("maven.modrinth:moonlight:$moonlight_version")
     implementation fg.deobf("maven.modrinth:lodestonelib:$lodestone_version")
-
-    implementation fg.deobf("curse.maven:supplementaries-412082:$supplementaries_version")
-    implementation fg.deobf("curse.maven:amendments-896746:$amendments_version")
     runtimeOnly "maven.modrinth:ancient-reforging:$ancientreforging_version"
 }
 

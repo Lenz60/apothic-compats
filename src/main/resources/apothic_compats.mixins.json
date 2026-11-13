@@ -4,10 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AdventureEventsMixin",
-    "CandleHolderBlockMixin",
-    "DoubleSkullBlockMixin",
-    "MonsterShootGunMixin",
-    "SkullCandleBlockMixin"
+    "MonsterShootGunMixin"
   ],
   "injectors": {
     "defaultRequire": 1

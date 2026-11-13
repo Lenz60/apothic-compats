@@ -1,1 +1,0 @@
-{"conditions":[{"type":"forge:mod_loaded","modid":"mekanismtools"}],"type":"apotheosis:salvaging","input":[{"item":"mekanismtools:steel_helmet"},{"item":"mekanismtools:steel_chestplate"},{"item":"mekanismtools:steel_leggings"},{"item":"mekanismtools:steel_boots"}],"outputs":[{"stack":{"count":1,"item":"mekanism:ingot_steel"},"max_count":3,"min_count":1}]}

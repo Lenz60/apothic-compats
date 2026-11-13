@@ -1,6 +1,6 @@
 package ianm1647.apothic_compats.mixin;
 
-import dev.shadowsoffire.apotheosis.ench.api.IEnchantingBlock;
+import dev.shadowsoffire.apothic_enchanting.api.EnchantmentStatBlock;
 import net.mehvahdjukaar.supplementaries.common.block.blocks.CandleHolderBlock;
 import net.mehvahdjukaar.supplementaries.common.block.blocks.LightUpWaterBlock;
 import net.minecraft.core.BlockPos;
@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(value = CandleHolderBlock.class, remap = false)
-public abstract class CandleHolderBlockMixin extends LightUpWaterBlock implements IEnchantingBlock {
+public abstract class CandleHolderBlockMixin extends LightUpWaterBlock implements EnchantmentStatBlock {
 
     protected CandleHolderBlockMixin(Properties pProperties) {
         super(pProperties);

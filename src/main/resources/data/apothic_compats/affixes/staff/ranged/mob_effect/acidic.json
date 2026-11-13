@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"}],"type":"apotheosis:mob_effect","mob_effect":"apothic_attributes:sundering","target":"ARROW_TARGET","values":{"mythic":{"duration":{"step":20,"min":80,"steps":4},"cooldown":40,"amplifier":0.0}},"types":["staff"]}

@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:mob_effect","mob_effect":"apothic_attributes:knowledge","target":"ATTACK_SELF","values":{"ancientreforging:ancient":{"duration":{"step":20,"min":600,"steps":45},"cooldown":600,"amplifier":{"step":0.5,"min":0,"steps":6}}},"types":["staff"]}

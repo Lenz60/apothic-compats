@@ -1,1 +1,0 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:mob_effect","mob_effect":"apothic_attributes:knowledge","target":"ATTACK_SELF","values":{"ancientreforging:ancient":{"duration":{"step":20,"min":250,"steps":10},"cooldown":40,"amplifier":{"step":0.25,"min":0,"steps":8}}},"types":["scythe"]}
