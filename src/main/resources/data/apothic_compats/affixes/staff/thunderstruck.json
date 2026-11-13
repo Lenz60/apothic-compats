@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"}],"type":"apotheosis:thunderstruck","types":["staff"],"values":{"mythic":{"step":1,"min":4,"steps":4},"epic":{"step":1,"min":3,"steps":3}}}

@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"aether"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"minecraft:generic.movement_speed","operation":"MULTIPLY_TOTAL","values":{"ancientreforging:ancient":{"step":0.04,"min":0.4,"steps":10}},"types":["dart_shooter"]}

@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"undergarden"}],"type":"apotheosis:salvaging","input":[{"item":"undergarden:utherium_helmet"},{"item":"undergarden:utherium_chestplate"},{"item":"undergarden:utherium_leggings"},{"item":"undergarden:utherium_boots"}],"outputs":[{"stack":{"count":1,"item":"undergarden:utherium_crystal"},"max_count":3,"min_count":1}]}

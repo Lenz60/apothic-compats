@@ -1,12 +1,12 @@
 package ianm1647.apothic_compats.affix;
 
-import dev.shadowsoffire.apotheosis.affix.AffixRegistry;
+import dev.shadowsoffire.apotheosis.adventure.affix.AffixRegistry;
 import ianm1647.apothic_compats.ApothicCompats;
 import ianm1647.apothic_compats.affix.aether.MagicalDartAffix;
 import ianm1647.apothic_compats.affix.create.MagicalPotatoAffix;
 import ianm1647.apothic_compats.affix.irons_artifice.*;
 import ianm1647.apothic_compats.affix.malum.*;
-import net.neoforged.fml.ModList;
+import net.minecraftforge.fml.ModList;
 
 public class ModAffixRegistry {
 
@@ -28,7 +28,8 @@ public class ModAffixRegistry {
             AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("scythe_cleaving"), ScytheCleavingAffix.CODEC);
             AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("staff_cleaving"), StaffCleavingAffix.CODEC);
         }
-
-
+        if (ModList.get().isLoaded("curios")) {
+            AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("curio_attribute"), CurioAttributeAffix.CODEC);
+        }
     }
 }

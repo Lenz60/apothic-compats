@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"eternal_starlight"}],"type":"apotheosis:salvaging","input":{"item":"eternal_starlight:rage_of_stars"},"outputs":[{"stack":{"count":1,"item":"eternal_starlight:amaramber_ingot"},"max_count":1,"min_count":0}]}

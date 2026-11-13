@@ -1,52 +1,49 @@
 package ianm1647.apothic_compats.event.irons_artifice;
 
-import ianm1647.apothic_compats.Comp.Attributes.Artifice;
+import ianm1647.apothic_compats.Comp;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
-import io.redspace.irons_artifice.data.*;
+import io.redspace.irons_artifice.data.ComponentType;
+import io.redspace.irons_artifice.data.ShotComponents;
+import io.redspace.irons_artifice.data.Value;
+import io.redspace.irons_artifice.data.ValueModifier;
 import io.redspace.irons_artifice.gun.ShotProfile;
-import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
-
-import java.util.function.BiConsumer;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ArtificeAttributeEvents {
 
     @SubscribeEvent
     public void composeShot(ComposeShotEvent e) {
         if (e.getEntity() instanceof Player player) {
-            addAttribute(Artifice.BULLET_SPREAD, ShotComponents.SPREAD, e.getShotProfile(), player);
-            addAttribute(Artifice.FIRE_RATE, ShotComponents.FIRE_RATE, e.getShotProfile(), player);
-            addAttribute(Artifice.GUN_DAMAGE, ShotComponents.DAMAGE, e.getShotProfile(), player);
-            addAttribute(Artifice.BULLET_KNOCKBACK, ShotComponents.KNOCKBACK, e.getShotProfile(), player);
-            addAttribute(Artifice.RELOAD_SPEED, ShotComponents.RELOAD_SPEED_MULTIPLIER, e.getShotProfile(), player);
-            addAttribute(Artifice.BULLET_PIERCE, ShotComponents.PIERCING, e.getShotProfile(), player);
-            addAttribute(Artifice.LEECH, ShotComponents.LEECH, e.getShotProfile(), player);
-            addAttribute(Artifice.GUN_RECOIL, ShotComponents.CAMERA_RECOIL_MULTIPLIER, e.getShotProfile(), player);
+            addAttribute(Comp.Attributes.Artifice.BULLET_SPREAD.get(), ShotComponents.SPREAD, e.getShotProfile(), player);
+            addAttribute(Comp.Attributes.Artifice.FIRE_RATE.get(), ShotComponents.FIRE_RATE, e.getShotProfile(), player);
+            addAttribute(Comp.Attributes.Artifice.GUN_DAMAGE.get(), ShotComponents.DAMAGE, e.getShotProfile(), player);
+            addAttribute(Comp.Attributes.Artifice.BULLET_KNOCKBACK.get(), ShotComponents.KNOCKBACK, e.getShotProfile(), player);
+            addAttribute(Comp.Attributes.Artifice.RELOAD_SPEED.get(), ShotComponents.RELOAD_SPEED_MULTIPLIER, e.getShotProfile(), player);
+            addAttribute(Comp.Attributes.Artifice.BULLET_PIERCE.get(), ShotComponents.PIERCING, e.getShotProfile(), player);
+            addAttribute(Comp.Attributes.Artifice.LEECH.get(), ShotComponents.LEECH, e.getShotProfile(), player);
+            addAttribute(Comp.Attributes.Artifice.GUN_RECOIL.get(), ShotComponents.CAMERA_RECOIL_MULTIPLIER, e.getShotProfile(), player);
         }
     }
 
     public static void applyAttribs(EntityAttributeModificationEvent e) {
-        e.getTypes().forEach(type ->
-                addAll(type, e::add,
-                        Artifice.BULLET_SPREAD,
-                        Artifice.FIRE_RATE,
-                        Artifice.GUN_DAMAGE,
-                        Artifice.BULLET_KNOCKBACK,
-                        Artifice.RELOAD_SPEED,
-                        Artifice.BULLET_PIERCE,
-                        Artifice.LEECH,
-                        Artifice.GUN_RECOIL));
+        e.getTypes().forEach(type -> {
+            e.add(type, Comp.Attributes.Artifice.BULLET_SPREAD.get());
+            e.add(type, Comp.Attributes.Artifice.FIRE_RATE.get());
+            e.add(type, Comp.Attributes.Artifice.GUN_DAMAGE.get());
+            e.add(type, Comp.Attributes.Artifice.BULLET_KNOCKBACK.get());
+            e.add(type, Comp.Attributes.Artifice.RELOAD_SPEED.get());
+            e.add(type, Comp.Attributes.Artifice.BULLET_PIERCE.get());
+            e.add(type, Comp.Attributes.Artifice.LEECH.get());
+            e.add(type, Comp.Attributes.Artifice.GUN_RECOIL.get());
+        });
     }
 
-    private static void addAttribute(Holder<Attribute> attribute, ComponentType<Value> component, ShotProfile profile, Player player) {
+    private static void addAttribute(Attribute attribute, ComponentType<Value> component, ShotProfile profile, Player player) {
         AttributeInstance inst = player.getAttribute(attribute);
         if (inst == null) {
             return;
@@ -56,14 +53,14 @@ public class ArtificeAttributeEvents {
         Value value = profile.peek(component);
 
         for (AttributeModifier modifier : inst.getModifiers()) {
-            double amount = modifier.amount();
+            double amount = modifier.getAmount();
 
-            switch (modifier.operation()) {
-                case ADD_VALUE ->
+            switch (modifier.getOperation()) {
+                case ADDITION ->
                         value.addModifier(new ValueModifier(amount, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
-                case ADD_MULTIPLIED_BASE ->
+                case MULTIPLY_BASE ->
                         baseMultiplier += amount;
-                case ADD_MULTIPLIED_TOTAL ->
+                case MULTIPLY_TOTAL ->
                         value.addModifier(new ValueModifier(amount, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
             }
         }
@@ -76,11 +73,4 @@ public class ArtificeAttributeEvents {
             ));
         }
     }
-
-    @SafeVarargs
-    private static void addAll(EntityType<? extends LivingEntity> type, BiConsumer<EntityType<? extends LivingEntity>, Holder<Attribute>> add, Holder<Attribute>... attribs) {
-        for (Holder<Attribute> a : attribs)
-            add.accept(type, a);
-    }
-
 }

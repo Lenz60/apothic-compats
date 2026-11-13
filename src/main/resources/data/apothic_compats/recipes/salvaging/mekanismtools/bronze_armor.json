@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"mekanismtools"}],"type":"apotheosis:salvaging","input":[{"item":"mekanismtools:bronze_helmet"},{"item":"mekanismtools:bronze_chestplate"},{"item":"mekanismtools:bronze_leggings"},{"item":"mekanismtools:bronze_boots"}],"outputs":[{"stack":{"count":1,"item":"mekanism:ingot_bronze"},"max_count":3,"min_count":1}]}

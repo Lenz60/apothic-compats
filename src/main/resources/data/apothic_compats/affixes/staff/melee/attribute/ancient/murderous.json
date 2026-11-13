@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"minecraft:generic.attack_damage","operation":"MULTIPLY_BASE","values":{"ancientreforging:ancient":{"step":0.025,"min":0.5,"steps":10}},"types":["staff"]}

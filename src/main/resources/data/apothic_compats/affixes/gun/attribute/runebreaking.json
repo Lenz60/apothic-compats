@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"irons_artifice"}],"type":"apotheosis:attribute","attribute":"attributeslib:prot_pierce","operation":"ADDITION","values":{"mythic":{"step":0.5,"min":5,"steps":14},"rare":{"step":0.5,"min":4,"steps":8},"epic":{"step":0.5,"min":5,"steps":10}},"types":["gun"]}

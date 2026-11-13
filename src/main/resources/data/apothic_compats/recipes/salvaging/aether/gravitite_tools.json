@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"aether"}],"type":"apotheosis:salvaging","input":[{"item":"aether:gravitite_axe"},{"item":"aether:gravitite_pickaxe"},{"item":"aether:gravitite_shovel"},{"item":"aether:gravitite_sword"},{"item":"aether:gravitite_hoe"}],"outputs":[{"stack":{"count":1,"item":"aether:enchanted_gravitite"},"max_count":1,"min_count":0}]}

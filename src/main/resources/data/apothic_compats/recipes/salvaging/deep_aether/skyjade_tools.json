@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"deep_aether"}],"type":"apotheosis:salvaging","input":[{"item":"deep_aether:skyjade_axe"},{"item":"deep_aether:skyjade_pickaxe"},{"item":"deep_aether:skyjade_shovel"},{"item":"deep_aether:skyjade_sword"},{"item":"deep_aether:skyjade_hoe"}],"outputs":[{"stack":{"count":1,"item":"deep_aether:skyjade"},"max_count":1,"min_count":0}]}

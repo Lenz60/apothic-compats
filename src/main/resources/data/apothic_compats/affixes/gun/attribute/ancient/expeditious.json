@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"irons_artifice"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"apothic_compats:reload_speed","operation":"MULTIPLY_TOTAL","values":{"ancientreforging:ancient":{"step":0.0375,"min":0.35,"steps":4}},"types":["gun"]}

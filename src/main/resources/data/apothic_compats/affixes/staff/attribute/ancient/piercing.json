@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"attributeslib:armor_pierce","operation":"ADDITION","values":{"ancientreforging:ancient":{"step":0.25,"min":10,"steps":56}},"types":["staff"]}

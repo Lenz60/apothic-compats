@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"minecraft:generic.attack_speed","operation":"MULTIPLY_TOTAL","values":{"ancientreforging:ancient":{"step":0.045,"min":0.75,"steps":10}},"types":["scythe"]}

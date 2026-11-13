@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "ianm1647.apothic_compats.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AdventureEventsMixin",
     "CandleHolderBlockMixin",

@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"aether"}],"type":"apotheosis:salvaging","input":[{"item":"aether:skyroot_axe"},{"item":"aether:skyroot_pickaxe"},{"item":"aether:skyroot_shovel"},{"item":"aether:skyroot_sword"},{"item":"aether:skyroot_hoe"}],"outputs":[{"stack":{"count":1,"item":"aether:skyroot_planks"},"max_count":1,"min_count":0}]}

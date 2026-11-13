@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apothic_compats:scythe_cleaving","values":{"ancientreforging:ancient":{"targets":{"step":1,"min":3,"steps":3},"chance":{"step":0.05,"min":0.8,"steps":4}}}}

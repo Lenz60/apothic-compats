@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"aether"}],"type":"apotheosis:salvaging","input":[{"item":"aether:holystone_axe"},{"item":"aether:holystone_pickaxe"},{"item":"aether:holystone_shovel"},{"item":"aether:holystone_sword"},{"item":"aether:holystone_hoe"}],"outputs":[{"stack":{"count":1,"item":"aether:holystone"},"max_count":1,"min_count":0}]}

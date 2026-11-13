@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"twilightforest"}],"type":"apotheosis:salvaging","input":[{"item":"twilightforest:arctic_helmet"},{"item":"twilightforest:arctic_chestplate"},{"item":"twilightforest:arctic_leggings"},{"item":"twilightforest:arctic_boots"}],"outputs":[{"stack":{"count":1,"item":"twilightforest:arctic_fur"},"max_count":3,"min_count":1}]}

@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"}],"type":"apotheosis:mob_effect","mob_effect":"apothic_attributes:knowledge","target":"ATTACK_SELF","values":{"mythic":{"duration":{"step":20,"min":100,"steps":3},"cooldown":80,"amplifier":{"step":0.125,"min":0,"steps":8}}},"types":["staff"]}

@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"aether"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"attributeslib:prot_shred","operation":"ADDITION","values":{"ancientreforging:ancient":{"step":0.005,"min":0.2,"steps":20}},"types":["dart_shooter"]}

@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"mekanismtools"}],"type":"apotheosis:salvaging","input":[{"item":"mekanismtools:osmium_helmet"},{"item":"mekanismtools:osmium_chestplate"},{"item":"mekanismtools:osmium_leggings"},{"item":"mekanismtools:osmium_boots"}],"outputs":[{"stack":{"count":1,"item":"mekanism:ingot_osmium"},"max_count":3,"min_count":1}]}

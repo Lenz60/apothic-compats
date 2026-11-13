@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"irons_artifice"}],"type":"apothic_compats:bullet_mob_effect","mob_effect":"minecraft:wither","stack_on_reapply":true,"stacking_limit":4,"target":"BULLET_TARGET","types":["gun"],"values":{"mythic":{"duration":{"step":20,"min":100,"steps":5},"cooldown":40,"amplifier":1.0}}}

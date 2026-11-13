@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"deep_aether"}],"type":"apotheosis:salvaging","input":[{"item":"deep_aether:stratus_helmet"},{"item":"deep_aether:stratus_chestplate"},{"item":"deep_aether:stratus_leggings"},{"item":"deep_aether:stratus_boots"}],"outputs":[{"stack":{"count":1,"item":"deep_aether:stratus_ingot"},"max_count":3,"min_count":1}]}

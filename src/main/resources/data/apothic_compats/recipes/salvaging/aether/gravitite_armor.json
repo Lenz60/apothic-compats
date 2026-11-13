@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"aether"}],"type":"apotheosis:salvaging","input":[{"item":"aether:gravitite_helmet"},{"item":"aether:gravitite_chestplate"},{"item":"aether:gravitite_leggings"},{"item":"aether:gravitite_boots"}],"outputs":[{"stack":{"count":1,"item":"aether:enchanted_gravitite"},"max_count":3,"min_count":1}]}

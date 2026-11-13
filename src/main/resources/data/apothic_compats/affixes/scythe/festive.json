@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"}],"type":"apotheosis:festive","types":["scythe"],"values":{"mythic":{"step":0.005,"min":0.03,"steps":6},"epic":{"step":0.005,"min":0.02,"steps":6}}}

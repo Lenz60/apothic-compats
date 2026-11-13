@@ -1,208 +1,114 @@
 package ianm1647.apothic_compats;
 
-import dev.shadowsoffire.apotheosis.data.RarityProvider;
-import dev.shadowsoffire.placebo.datagen.DataGenBuilder;
-import dev.shadowsoffire.placebo.util.data.DynamicRegistryProvider;
-import ianm1647.ancientreforging.data.ARRarityProvider;
+import dev.shadowsoffire.apotheosis.adventure.affix.Affix;
+import dev.shadowsoffire.apotheosis.adventure.affix.AffixHelper;
+import dev.shadowsoffire.apotheosis.adventure.affix.AffixInstance;
+import dev.shadowsoffire.apotheosis.adventure.affix.AffixRegistry;
+import dev.shadowsoffire.apotheosis.adventure.loot.LootRarity;
+import dev.shadowsoffire.apotheosis.adventure.loot.RarityRegistry;
+import dev.shadowsoffire.placebo.reload.DynamicHolder;
 import ianm1647.apothic_compats.affix.ModAffixRegistry;
-import ianm1647.apothic_compats.data.*;
-import ianm1647.apothic_compats.data.alexsmods.CavesInvaderProvider;
-import ianm1647.apothic_compats.data.alexsmods.MobsInvaderProvider;
-import ianm1647.apothic_compats.data.borninchaos.ChaosInvaderProvider;
-import ianm1647.apothic_compats.data.create.PotatoCannonAffixProvider;
-import ianm1647.apothic_compats.data.curios.CuriosAffixLootProvider;
-import ianm1647.apothic_compats.data.curios.CuriosExtraGemBonusProvider;
-import ianm1647.apothic_compats.data.curios.CuriosProvider;
-import ianm1647.apothic_compats.data.friendsandfoes.FAFInvaderProvider;
-import ianm1647.apothic_compats.data.irons_artifice.ArtificeAffixProvider;
-import ianm1647.apothic_compats.data.irons_artifice.ArtificeExtraGemBonusProvider;
-import ianm1647.apothic_compats.data.irons_artifice.ArtificeGearSetProvider;
-import ianm1647.apothic_compats.data.irons_artifice.ArtificeInvaderProvider;
-import ianm1647.apothic_compats.data.malum.MalumExtraGemBonusProvider;
-import ianm1647.apothic_compats.data.ae2.*;
-import ianm1647.apothic_compats.data.aether.*;
-import ianm1647.apothic_compats.data.allthemodium.*;
-import ianm1647.apothic_compats.data.ars_nouveau.*;
-import ianm1647.apothic_compats.data.cataclysm.*;
-import ianm1647.apothic_compats.data.curios.CuriosAffixProvider;
-import ianm1647.apothic_compats.data.deep_aether.*;
-import ianm1647.apothic_compats.data.deeperdarker.*;
-import ianm1647.apothic_compats.data.farmersdelight.*;
-import ianm1647.apothic_compats.data.eternal_starlight.*;
-import ianm1647.apothic_compats.data.malum.*;
-import ianm1647.apothic_compats.data.mekanism.*;
-import ianm1647.apothic_compats.data.mowziesmobs.MowzieInvaderProvider;
-import ianm1647.apothic_compats.data.the_bumblezone.*;
-import ianm1647.apothic_compats.data.twilight.*;
-import ianm1647.apothic_compats.data.undergarden.*;
 import ianm1647.apothic_compats.event.AffixEvents;
 import ianm1647.apothic_compats.event.AttributeEvents;
 import ianm1647.apothic_compats.event.irons_artifice.ArtificeAffixEvents;
 import ianm1647.apothic_compats.event.irons_artifice.ArtificeAttributeEvents;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.PackOutput;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModList;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
-
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Holder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
 
 @Mod(ApothicCompats.MODID)
 public class ApothicCompats {
     public static final String MODID = "apothic_compats";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
 
-    /* TODO
-        - add iss apothic compat (ancient reforging)
-        - make iss apothic and artifice affixes
+    /**
+     * Custom damage type used to re-apply projectile damage as magic damage that bypasses armor,
+     * replicating 1.21 damage-tag behavior on 1.20.1.
      */
+    public static final ResourceKey<DamageType> MAGIC_PROJECTILE = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(MODID, "magic_projectile"));
+    public static final TagKey<DamageType> MAGIC_DAMAGE_TAG = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(MODID, "magic_projectile"));
 
-    public ApothicCompats(IEventBus modEventBus, ModContainer modContainer) {
-        NeoForge.EVENT_BUS.register(this);
-        NeoForge.EVENT_BUS.register(new AffixEvents());
-        NeoForge.EVENT_BUS.register(new AttributeEvents());
+    public ApothicCompats() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new AffixEvents());
+        MinecraftForge.EVENT_BUS.register(new AttributeEvents());
         if (ModList.get().isLoaded("irons_artifice")) {
             modEventBus.addListener(ArtificeAttributeEvents::applyAttribs);
-            NeoForge.EVENT_BUS.register(new ArtificeAffixEvents());
-            NeoForge.EVENT_BUS.register(new ArtificeAttributeEvents());
+            MinecraftForge.EVENT_BUS.register(new ArtificeAffixEvents());
+            MinecraftForge.EVENT_BUS.register(new ArtificeAttributeEvents());
         }
 
-        modContainer.registerConfig(ModConfig.Type.STARTUP, Config.STARTUP_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.STARTUP_CONFIG);
 
         Comp.bootstrap(modEventBus);
 
         ModAffixRegistry.registerAffixes();
-        modEventBus.addListener(this::data);
-    }
-
-    public void data(GatherDataEvent e) {
-        DataGenerator generator = e.getGenerator();
-        PackOutput output = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = e.getLookupProvider();
-        ExistingFileHelper helper = e.getExistingFileHelper();
-
-        TagProvider.Blocks blockTags = new TagProvider.Blocks(output, lookupProvider, helper);
-        generator.addProvider(e.includeServer(), blockTags);
-        generator.addProvider(e.includeServer(), new TagProvider.Items(output, lookupProvider, blockTags.contentsGetter(), helper));
-        generator.addProvider(e.includeServer(), new TagProvider.Biomes(output, lookupProvider, helper));
-        generator.addProvider(e.includeClient(), new ItemModelsProvider(output, helper));
-        generator.addProvider(e.includeServer(), new CuriosProvider(output, helper, lookupProvider));
-
-        DataGenBuilder.create(ApothicCompats.MODID)
-                .provider(DynamicRegistryProvider.runSilently(RarityProvider::new))
-                .provider(DynamicRegistryProvider.runSilently(ARRarityProvider::new))
-                .provider(DataMapProvider::new)
-                .provider(RarityOverrideProvider::new)
-                .provider(RecipeProvider::new)
-
-                .provider(Ae2AffixLootProvider::new)
-                .provider(Ae2GearSetProvider::new)
-
-                .provider(AetherAffixLootProvider::new)
-                .provider(AetherAffixProvider::new)
-                .provider(AetherGearSetProvider::new)
-                .provider(AetherInvaderProvider::new)
-                .provider(DartShooterAffixProvider::new)
-
-                .provider(CavesInvaderProvider::new)
-                .provider(MobsInvaderProvider::new)
-
-                .provider(ArtificeAffixProvider::new)
-                .provider(ArtificeExtraGemBonusProvider::new)
-                .provider(ArtificeGearSetProvider::new)
-                .provider(ArtificeInvaderProvider::new)
-
-                .provider(ATMAffixLootProvider::new)
-                .provider(ATMGearSetProvider::new)
-                .provider(ATMInvaderProvider::new)
-
-                .provider(ArsAffixLootProvider::new)
-                .provider(ArsAffixProvider::new)
-                .provider(ArsGearSetProvider::new)
-                .provider(ArsGemProvider::new)
-                .provider(ArsInvaderProvider::new)
-
-                .provider(ChaosInvaderProvider::new)
-
-                .provider(CataclysmAffixLootProvider::new)
-                .provider(CataclysmGearSetProvider::new)
-                .provider(CataclysmInvaderProvider::new)
-
-                .provider(PotatoCannonAffixProvider::new)
-
-                .provider(CuriosAffixLootProvider::new)
-                .provider(CuriosAffixProvider::new)
-                .provider(CuriosExtraGemBonusProvider::new)
-
-                .provider(DeepAetherAffixLootProvider::new)
-                .provider(DeepAetherGearSetProvider::new)
-
-                .provider(DeeperDarkerAffixLootProvider::new)
-                .provider(DeeperDarkerAffixProvider::new)
-                .provider(DeeperDarkerGearSetProvider::new)
-                .provider(DeeperDarkerInvaderProvider::new)
-
-                .provider(FarmersDelightAffixLootProvider::new)
-
-                .provider(FAFInvaderProvider::new)
-
-                .provider(StarlightAffixLootProvider::new)
-                .provider(StarlightAffixProvider::new)
-                .provider(StarlightGearSetProvider::new)
-                .provider(StarlightInvaderProvider::new)
-
-                .provider(MalumAffixProvider::new)
-                .provider(MalumExtraGemBonusProvider::new)
-                .provider(MalumGemProvider::new)
-                .provider(ScytheAffixProvider::new)
-                .provider(StaffAffixProvider::new)
-
-                .provider(MekanismAffixLootProvider::new)
-                .provider(MekanismGearSetProvider::new)
-
-                .provider(MowzieInvaderProvider::new)
-
-                .provider(BumblezoneAffixLootProvider::new)
-                .provider(BumblezoneAffixProvider::new)
-                .provider(BumblezoneGearSetProvider::new)
-                .provider(BumblezoneInvaderProvider::new)
-
-                .provider(TwilightAffixLootProvider::new)
-                .provider(TwilightAffixProvider::new)
-                .provider(TwilightInvaderProvider::new)
-
-                .provider(UndergardenAffixLootProvider::new)
-                .provider(UndergardenAffixProvider::new)
-                .provider(UndergardenGearSetProvider::new)
-                .provider(UndergardenInvaderProvider::new)
-
-                .build(e);
-
-        Object2IntOpenHashMap<String> map = (Object2IntOpenHashMap<String>) DataProvider.FIXED_ORDER_FIELDS;
-        map.put("ancientreforging:ancient", 6);
     }
 
     public static ResourceLocation loc(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, path);
+        return new ResourceLocation(MODID, path);
     }
 
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
-        LOGGER.info("Apothic Compats is starting...");
+    /**
+     * Reads affix data from any entity's persistent NBT (the same format {@link AffixHelper} writes for arrows).
+     */
+    public static Stream<AffixInstance> streamEntityAffixes(Entity entity) {
+        CompoundTag afxData = entity.getPersistentData().getCompound(AffixHelper.AFFIX_DATA);
+        if (!afxData.contains(AffixHelper.AFFIXES)) return Stream.empty();
+        CompoundTag affixes = afxData.getCompound(AffixHelper.AFFIXES);
+        DynamicHolder<LootRarity> rarity = AffixHelper.getRarity(afxData);
+        if (!rarity.isBound()) rarity = RarityRegistry.getMinRarity();
+        Map<DynamicHolder<? extends Affix>, AffixInstance> map = new HashMap<>();
+        for (String key : affixes.getAllKeys()) {
+            DynamicHolder<Affix> affix = AffixRegistry.INSTANCE.holder(new ResourceLocation(key));
+            if (!affix.isBound()) continue;
+            map.put(affix, new AffixInstance(affix, ItemStack.EMPTY, rarity, affixes.getFloat(key)));
+        }
+        return map.values().stream();
+    }
+
+    /**
+     * 1.20.1 replacement for adding damage tags to a damage source: cancels the incoming attack and
+     * re-applies it as a custom magic damage type that bypasses armor, but only if the projectile
+     * carries the requested affix.
+     */
+    public static void convertDamageToMagic(LivingAttackEvent e, Class<? extends Affix> affixClass) {
+        DamageSource src = e.getSource();
+        if (src.is(MAGIC_DAMAGE_TAG)) return;
+        Entity direct = src.getDirectEntity();
+        if (direct == null) return;
+        if (streamEntityAffixes(direct).noneMatch(a -> a.affix().isBound() && affixClass.isInstance(a.affix().get()))) return;
+        e.setCanceled(true);
+        LivingEntity target = e.getEntity();
+        Holder<DamageType> holder = target.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(MAGIC_PROJECTILE);
+        DamageSource magic = new DamageSource(holder, direct, src.getEntity());
+        target.hurt(magic, e.getAmount());
     }
 }

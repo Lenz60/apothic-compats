@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"twilightforest"}],"type":"apotheosis:salvaging","input":[{"item":"twilightforest:fiery_sword"},{"item":"twilightforest:fiery_pickaxe"}],"outputs":[{"stack":{"count":1,"item":"twilightforest:fiery_ingot"},"max_count":1,"min_count":0}]}

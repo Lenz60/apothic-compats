@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"aether"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:mob_effect","mob_effect":"minecraft:slowness","target":"ARROW_TARGET","values":{"ancientreforging:ancient":{"duration":{"step":20,"min":150,"steps":10},"cooldown":80,"amplifier":{"step":0.25,"min":0,"steps":12}}},"types":["dart_shooter"]}

@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"irons_artifice"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"attributeslib:crit_damage","operation":"ADDITION","values":{"ancientreforging:ancient":{"step":0.03,"min":0.5,"steps":10}},"types":["gun"]}

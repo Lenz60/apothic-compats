@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"deeperdarker"}],"type":"apotheosis:salvaging","input":[{"item":"deeperdarker:resonarium_helmet"},{"item":"deeperdarker:resonarium_chestplate"},{"item":"deeperdarker:resonarium_leggings"},{"item":"deeperdarker:resonarium_boots"}],"outputs":[{"stack":{"count":1,"item":"deeperdarker:resonarium_plate"},"max_count":2,"min_count":0}]}

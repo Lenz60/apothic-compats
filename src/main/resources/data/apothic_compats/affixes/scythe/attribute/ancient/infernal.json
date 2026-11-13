@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"attributeslib:fire_damage","operation":"ADDITION","values":{"ancientreforging:ancient":{"step":0.25,"min":8,"steps":48}},"types":["scythe"]}

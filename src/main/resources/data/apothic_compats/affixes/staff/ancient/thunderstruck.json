@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:thunderstruck","types":["staff"],"values":{"ancientreforging:ancient":{"step":1,"min":7,"steps":4}}}

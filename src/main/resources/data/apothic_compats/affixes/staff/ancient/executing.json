@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:executing","types":["staff"],"values":{"ancientreforging:ancient":{"step":0.025,"min":0.35,"steps":10}}}

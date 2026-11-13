@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"ars_nouveau"}],"type":"apotheosis:salvaging","input":[{"item":"ars_nouveau:sorcerer_hood"},{"item":"ars_nouveau:sorcerer_robes"},{"item":"ars_nouveau:sorcerer_leggings"},{"item":"ars_nouveau:sorcerer_boots"}],"outputs":[{"stack":{"count":1,"item":"ars_nouveau:magebloom_fiber"},"max_count":1,"min_count":0}]}

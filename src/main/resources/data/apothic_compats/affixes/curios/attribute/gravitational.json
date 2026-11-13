@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"curios"}],"type":"apotheosis:attribute","attribute":"minecraft:generic.gravity","operation":"MULTIPLY_TOTAL","values":{"common":-0.02,"uncommon":-0.03,"mythic":-0.06,"rare":-0.04,"epic":-0.05},"types":["back","belt","body","bracelet","charm","curio","feet","hands","head","necklace","ring"]}

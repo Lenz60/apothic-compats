@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"twilightforest"}],"type":"apotheosis:salvaging","input":[{"item":"twilightforest:fiery_helmet"},{"item":"twilightforest:fiery_chestplate"},{"item":"twilightforest:fiery_leggings"},{"item":"twilightforest:fiery_boots"}],"outputs":[{"stack":{"count":1,"item":"twilightforest:fiery_ingot"},"max_count":3,"min_count":1}]}

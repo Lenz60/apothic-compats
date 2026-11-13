@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"ars_nouveau"}],"type":"apotheosis:salvaging","input":[{"item":"ars_nouveau:battlemage_hood"},{"item":"ars_nouveau:battlemage_robes"},{"item":"ars_nouveau:battlemage_leggings"},{"item":"ars_nouveau:battlemage_boots"}],"outputs":[{"stack":{"count":1,"item":"ars_nouveau:magebloom_fiber"},"max_count":1,"min_count":0}]}

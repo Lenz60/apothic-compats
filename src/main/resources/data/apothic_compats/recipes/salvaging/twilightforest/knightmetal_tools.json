@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"twilightforest"}],"type":"apotheosis:salvaging","input":[{"item":"twilightforest:knightmetal_axe"},{"item":"twilightforest:knightmetal_pickaxe"},{"item":"twilightforest:knightmetal_sword"}],"outputs":[{"stack":{"count":1,"item":"twilightforest:knightmetal_ingot"},"max_count":1,"min_count":0}]}

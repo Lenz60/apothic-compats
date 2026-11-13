@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"attributeslib:prot_pierce","operation":"ADDITION","values":{"ancientreforging:ancient":{"step":0.5,"min":10,"steps":20}},"types":["scythe"]}

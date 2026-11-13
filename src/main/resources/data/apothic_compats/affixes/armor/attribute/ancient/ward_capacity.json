@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"malum"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"malum:soul_ward_capacity","operation":"ADDITION","values":{"ancientreforging:ancient":15.0},"types":["helmet","chestplate","leggings","boots"]}

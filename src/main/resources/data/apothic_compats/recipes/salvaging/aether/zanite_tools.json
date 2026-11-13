@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"aether"}],"type":"apotheosis:salvaging","input":[{"item":"aether:zanite_axe"},{"item":"aether:zanite_pickaxe"},{"item":"aether:zanite_shovel"},{"item":"aether:zanite_sword"},{"item":"aether:zanite_hoe"}],"outputs":[{"stack":{"count":1,"item":"aether:zanite_gemstone"},"max_count":1,"min_count":0}]}

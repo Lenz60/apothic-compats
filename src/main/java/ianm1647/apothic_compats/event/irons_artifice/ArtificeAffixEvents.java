@@ -1,15 +1,15 @@
 package ianm1647.apothic_compats.event.irons_artifice;
 
-import ianm1647.apothic_compats.affix.irons_artifice.MultiShotAffix;
+import ianm1647.apothic_compats.affix.irons_artifice.BulletModifierAffix;
 import ianm1647.apothic_compats.affix.irons_artifice.InfiniteAmmoAffix;
-import ianm1647.apothic_compats.affix.irons_artifice.MagicalBulletAffix;
+import ianm1647.apothic_compats.affix.irons_artifice.MultiShotAffix;
 import ianm1647.apothic_compats.affix.irons_artifice.TelepathicGunAffix;
 import io.redspace.irons_artifice.api.AmmoEvent;
+import io.redspace.irons_artifice.api.BulletImpactEvent;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.event.entity.EntityInvulnerabilityCheckEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ArtificeAffixEvents {
 
@@ -29,8 +29,7 @@ public class ArtificeAffixEvents {
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
-    public void modifyIncomingDamageTags(EntityInvulnerabilityCheckEvent e) {
-        MagicalBulletAffix.modifyIncomingDamageTags(e);
+    public void bulletImpact(BulletImpactEvent e) {
+        BulletModifierAffix.onBulletImpact(e);
     }
-
 }

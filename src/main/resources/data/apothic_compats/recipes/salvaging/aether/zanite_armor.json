@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"aether"}],"type":"apotheosis:salvaging","input":[{"item":"aether:zanite_helmet"},{"item":"aether:zanite_chestplate"},{"item":"aether:zanite_leggings"},{"item":"aether:zanite_boots"}],"outputs":[{"stack":{"count":1,"item":"aether:zanite_gemstone"},"max_count":3,"min_count":1}]}

@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"ae2"}],"type":"apotheosis:salvaging","input":[{"item":"ae2:fluix_axe"},{"item":"ae2:fluix_pickaxe"},{"item":"ae2:fluix_shovel"},{"item":"ae2:fluix_sword"},{"item":"ae2:fluix_hoe"}],"outputs":[{"stack":{"count":1,"item":"ae2:fluix_crystal"},"max_count":1,"min_count":0}]}

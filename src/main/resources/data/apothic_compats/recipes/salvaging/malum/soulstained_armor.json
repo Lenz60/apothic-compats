@@ -1,0 +1,1 @@
+{"conditions":[{"type":"forge:mod_loaded","modid":"malum"}],"type":"apotheosis:salvaging","input":[{"item":"malum:soul_stained_steel_helmet"},{"item":"malum:soul_stained_steel_chestplate"},{"item":"malum:soul_stained_steel_leggings"},{"item":"malum:soul_stained_steel_boots"}],"outputs":[{"stack":{"count":1,"item":"malum:soul_stained_steel_plating"},"max_count":3,"min_count":2}]}

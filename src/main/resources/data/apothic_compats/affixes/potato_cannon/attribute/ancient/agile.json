@@ -1,0 +1,1 @@
+{"forge:conditions":[{"type":"forge:mod_loaded","modid":"create"},{"type":"forge:mod_loaded","modid":"ancientreforging"}],"type":"apotheosis:attribute","attribute":"attributeslib:draw_speed","operation":"MULTIPLY_TOTAL","values":{"ancientreforging:ancient":{"step":0.05,"min":1,"steps":10}},"types":["potato_cannon"]}
