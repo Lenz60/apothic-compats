@@ -66,65 +66,65 @@ public class ArtificeAffixProvider extends AffixProvider {
                 .definition(AffixType.ABILITY, DEFAULT_WEIGHT, DEFAULT_QUALITY)
                 .categories(Comp.LootCategories.Artifice.GUN)
                 .playerAnimations(false).castingSlowdown(false)
-                .value(rare, 1, 2, 120)
-                .value(epic, 2,3, 80)
-                .value(mythic, 3, 4, 60));
+                .value(rare, 1, 2, 100)
+                .value(epic, 3, 4, 80)
+                .value(mythic, 4, 5, 60));
 
         this.addSpellTriggerAffix("gun", "poison_arrow", SpellRegistry.POISON_ARROW_SPELL.get(), SpellTriggerAffix.TriggerType.PROJECTILE_HIT, b -> b
                 .definition(AffixType.ABILITY, DEFAULT_WEIGHT, DEFAULT_QUALITY)
                 .categories(Comp.LootCategories.Artifice.GUN)
                 .playerAnimations(false).castingSlowdown(false)
-                .value(rare, 1, 2, 120)
-                .value(epic, 2,3, 80)
-                .value(mythic, 3, 4, 60));
+                .value(rare, 1, 2, 100)
+                .value(epic, 3, 4, 80)
+                .value(mythic, 4, 5, 60));
 
         this.addSpellTriggerAffix("gun", "fire_arrow", SpellRegistry.FIRE_ARROW_SPELL.get(), SpellTriggerAffix.TriggerType.PROJECTILE_HIT, b -> b
                 .definition(AffixType.ABILITY, DEFAULT_WEIGHT, DEFAULT_QUALITY)
                 .categories(Comp.LootCategories.Artifice.GUN)
                 .playerAnimations(false).castingSlowdown(false)
-                .value(rare, 1, 2, 120)
-                .value(epic, 2,3, 80)
-                .value(mythic, 3, 4, 60));
+                .value(rare, 1, 2, 100)
+                .value(epic, 3, 4, 80)
+                .value(mythic, 4, 5, 60));
 
         this.addSpellTriggerAffix("gun", "missile", SpellRegistry.MAGIC_MISSILE_SPELL.get(), SpellTriggerAffix.TriggerType.PROJECTILE_HIT, b -> b
                 .definition(AffixType.ABILITY, DEFAULT_WEIGHT, DEFAULT_QUALITY)
                 .categories(Comp.LootCategories.Artifice.GUN)
                 .playerAnimations(false).castingSlowdown(false)
-                .value(rare, 1, 2, 120)
-                .value(epic, 2,3, 80)
-                .value(mythic, 3, 4, 60));
+                .value(rare, 1, 2, 100)
+                .value(epic, 3, 4, 80)
+                .value(mythic, 4, 5, 60));
 
         this.addSpellTriggerAffix("gun", "firecracker", SpellRegistry.FIRECRACKER_SPELL.get(), SpellTriggerAffix.TriggerType.PROJECTILE_HIT, b -> b
                 .definition(AffixType.ABILITY, DEFAULT_WEIGHT, DEFAULT_QUALITY)
                 .categories(Comp.LootCategories.Artifice.GUN)
                 .playerAnimations(false).castingSlowdown(false)
-                .value(rare, 1, 2, 120)
-                .value(epic, 2,3, 80)
-                .value(mythic, 3, 4, 60));
+                .value(rare, 1, 2, 100)
+                .value(epic, 3, 4, 80)
+                .value(mythic, 4, 5, 60));
 
         this.addSpellTriggerAffix("gun", "firebolt", SpellRegistry.FIREBOLT_SPELL.get(), SpellTriggerAffix.TriggerType.PROJECTILE_HIT, b -> b
                 .definition(AffixType.ABILITY, DEFAULT_WEIGHT, DEFAULT_QUALITY)
                 .categories(Comp.LootCategories.Artifice.GUN)
                 .playerAnimations(false).castingSlowdown(false)
-                .value(rare, 1, 2, 120)
-                .value(epic, 2,3, 80)
-                .value(mythic, 3, 4, 60));
+                .value(rare, 1, 2, 100)
+                .value(epic, 3, 4, 80)
+                .value(mythic, 4, 5, 60));
 
         this.addSpellTriggerAffix("gun", "guiding_bolt", SpellRegistry.GUIDING_BOLT_SPELL.get(), SpellTriggerAffix.TriggerType.PROJECTILE_HIT, b -> b
                 .definition(AffixType.ABILITY, DEFAULT_WEIGHT, DEFAULT_QUALITY)
                 .categories(Comp.LootCategories.Artifice.GUN)
                 .playerAnimations(false).castingSlowdown(false)
-                .value(rare, 1, 2, 120)
-                .value(epic, 2,3, 80)
-                .value(mythic, 3, 4, 60));
+                .value(rare, 1, 2, 100)
+                .value(epic, 3, 4, 80)
+                .value(mythic, 4, 5, 60));
 
         this.addSpellTriggerAffix("gun", "icicle", SpellRegistry.ICICLE_SPELL.get(), SpellTriggerAffix.TriggerType.PROJECTILE_HIT, b -> b
                 .definition(AffixType.ABILITY, DEFAULT_WEIGHT, DEFAULT_QUALITY)
                 .categories(Comp.LootCategories.Artifice.GUN)
                 .playerAnimations(false).castingSlowdown(false)
-                .value(rare, 1, 2, 120)
-                .value(epic, 2,3, 80)
-                .value(mythic, 3, 4, 60));
+                .value(rare, 1, 2, 100)
+                .value(epic, 3, 4, 80)
+                .value(mythic, 4, 5, 60));
 
         this.addSpellTriggerAffix("gun", "sunbeam", SpellRegistry.SUNBEAM_SPELL.get(), SpellTriggerAffix.TriggerType.PROJECTILE_HIT, b -> b
                 .definition(AffixType.ABILITY, DEFAULT_WEIGHT, DEFAULT_QUALITY)
@@ -354,6 +354,7 @@ public class ArtificeAffixProvider extends AffixProvider {
         this.addMobEffect("gun", "ensnaring", MobEffects.MOVEMENT_SLOWDOWN, BulletModifierAffix.Target.BULLET_TARGET, b -> b
                 .definition(AffixType.BASIC_EFFECT, DEFAULT_WEIGHT, DEFAULT_QUALITY)
                 .categories(Comp.LootCategories.Artifice.GUN)
+                .value(common, 30, 60, 0, 160)
                 .value(uncommon, 40, 80, 0, 160)
                 .value(rare, 40, 100, 0, 160)
                 .value(epic, 40, 120, StepFunction.fromBounds(0, 1, 0.25F), 160)
@@ -362,6 +363,7 @@ public class ArtificeAffixProvider extends AffixProvider {
         this.addMobEffect("gun", "fleeting", MobEffects.MOVEMENT_SPEED, BulletModifierAffix.Target.BULLET_SELF, b -> b
                 .definition(AffixType.BASIC_EFFECT, DEFAULT_WEIGHT, DEFAULT_QUALITY)
                 .categories(Comp.LootCategories.Artifice.GUN)
+                .value(common, 60, 120, 0, 0)
                 .value(uncommon, 100, 200, 0, 0)
                 .value(rare, 100, 200, 0, 0)
                 .value(epic, 100, 200, StepFunction.fromBounds(0, 1, 0.25F), 0)
@@ -370,6 +372,7 @@ public class ArtificeAffixProvider extends AffixProvider {
         this.addMobEffect("gun", "grievous", ALObjects.MobEffects.GRIEVOUS, BulletModifierAffix.Target.BULLET_TARGET, b -> b
                 .definition(AffixType.BASIC_EFFECT, DEFAULT_WEIGHT, DEFAULT_QUALITY)
                 .categories(Comp.LootCategories.Artifice.GUN)
+                .value(common, 150, 150, 0, 500)
                 .value(uncommon, 200, 200, 0, 500)
                 .value(rare, 200, 300, 0, 500)
                 .value(epic, 200, 300, StepFunction.fromBounds(0, 1, 0.25F), 400)
@@ -380,6 +383,7 @@ public class ArtificeAffixProvider extends AffixProvider {
                 .categories(Comp.LootCategories.Artifice.GUN)
                 .stacking()
                 .limit(5)
+                .value(uncommon, 80, 120, 0, 40)
                 .value(rare, 100, 160, 0, 40)
                 .value(epic, 100, 160, StepFunction.fromBounds(0, 1, 0.25F), 40)
                 .value(mythic, 100, 200, StepFunction.fromBounds(0, 2, 0.25F), 40));
@@ -417,7 +421,7 @@ public class ArtificeAffixProvider extends AffixProvider {
                 AffixDefinition.builder(AffixType.ABILITY)
                         .weights(TieredWeights.forAllTiers(DEFAULT_WEIGHT, DEFAULT_QUALITY))
                         .build(),
-                linkedSet(rare, epic, mythic)), new ModLoadedCondition(mod));
+                linkedSet(common, uncommon, rare, epic, mythic)), new ModLoadedCondition(mod));
 
         this.addConditionally(ApothicCompats.loc("gun/multishot"),
                 AffixBuilder.simple(MultiShotAffix::new)

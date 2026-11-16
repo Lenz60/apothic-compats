@@ -45,8 +45,8 @@ public class ArtificeExtraGemBonusProvider extends DynamicRegistryProvider<Extra
                         .value(Purity.CHIPPED, 0.1)
                         .value(Purity.FLAWED, 0.15)
                         .value(Purity.NORMAL, 0.2)
-                        .value(Purity.FLAWLESS, 0.25)
-                        .value(Purity.PERFECT, 0.3)));
+                        .value(Purity.FLAWLESS, 0.35)
+                        .value(Purity.PERFECT, 0.40)));
 
         addBonus(Apotheosis.loc("core/combatant"), b -> b
                 .bonus(Comp.LootCategories.Artifice.GUN, AttributeBonus.builder()
@@ -54,19 +54,19 @@ public class ArtificeExtraGemBonusProvider extends DynamicRegistryProvider<Extra
                         .op(AttributeModifier.Operation.ADD_VALUE)
                         .value(Purity.FLAWED, 1)
                         .value(Purity.NORMAL, 1.5)
-                        .value(Purity.FLAWLESS, 2)
-                        .value(Purity.PERFECT, 3)));
+                        .value(Purity.FLAWLESS, 3.5)
+                        .value(Purity.PERFECT, 4)));
 
         addBonus(Apotheosis.loc("core/breach"), b -> b
                 .bonus(Comp.LootCategories.Artifice.GUN, AttributeBonus.builder()
                         .attr(ALObjects.Attributes.CRIT_CHANCE)
                         .op(AttributeModifier.Operation.ADD_VALUE)
-                        .value(Purity.FLAWED, 0.02)
                         .value(Purity.FLAWED, 0.04)
                         .value(Purity.FLAWED, 0.06)
-                        .value(Purity.NORMAL, 0.08)
-                        .value(Purity.FLAWLESS, 0.1)
-                        .value(Purity.PERFECT, 0.12)));
+                        .value(Purity.FLAWED, 0.08)
+                        .value(Purity.NORMAL, 0.1)
+                        .value(Purity.FLAWLESS, 0.30)
+                        .value(Purity.PERFECT, 0.40)));
 
         addBonus(Apotheosis.loc("core/lightning"), b -> b
                 .bonus(Comp.LootCategories.Artifice.GUN, AttributeBonus.builder()
@@ -76,8 +76,8 @@ public class ArtificeExtraGemBonusProvider extends DynamicRegistryProvider<Extra
                         .value(Purity.CHIPPED, 0.15)
                         .value(Purity.FLAWED, 0.25)
                         .value(Purity.NORMAL, 0.35)
-                        .value(Purity.FLAWLESS, 0.45)
-                        .value(Purity.PERFECT, 0.55)));
+                        .value(Purity.FLAWLESS, 0.50)
+                        .value(Purity.PERFECT, 0.60)));
 
         addBonus(Apotheosis.loc("core/slipstream"), b -> b
                 .bonus(Comp.LootCategories.Artifice.GUN, AttributeBonus.builder()
@@ -96,8 +96,8 @@ public class ArtificeExtraGemBonusProvider extends DynamicRegistryProvider<Extra
                         .value(Purity.CHIPPED, 0.2)
                         .value(Purity.FLAWED, 0.3)
                         .value(Purity.NORMAL, 0.4)
-                        .value(Purity.FLAWLESS, 0.5)
-                        .value(Purity.PERFECT, 0.65)));
+                        .value(Purity.FLAWLESS, 0.65)
+                        .value(Purity.PERFECT, 0.70)));
 
         addBonus(Apotheosis.loc("core/warlord"), b -> b
                 .bonus(Comp.LootCategories.Artifice.GUN, AttributeBonus.builder()
@@ -105,9 +105,9 @@ public class ArtificeExtraGemBonusProvider extends DynamicRegistryProvider<Extra
                         .op(AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
                         .value(Purity.CHIPPED, -0.05)
                         .value(Purity.FLAWED, -0.1)
-                        .value(Purity.NORMAL, -0.15)
-                        .value(Purity.FLAWLESS, -0.2)
-                        .value(Purity.PERFECT, -0.25)));
+                        .value(Purity.NORMAL, -0.19)
+                        .value(Purity.FLAWLESS, -0.35)
+                        .value(Purity.PERFECT, -0.45)));
 
         addBonus(Apotheosis.loc("overworld/earth"), b -> b
                 .bonus(Comp.LootCategories.Artifice.GUN, AttributeBonus.builder()
@@ -115,8 +115,8 @@ public class ArtificeExtraGemBonusProvider extends DynamicRegistryProvider<Extra
                         .op(AttributeModifier.Operation.ADD_VALUE)
                         .value(Purity.FLAWED, 1)
                         .value(Purity.NORMAL, 2)
-                        .value(Purity.FLAWLESS, 3)
-                        .value(Purity.PERFECT, 4)));
+                        .value(Purity.FLAWLESS, 4)
+                        .value(Purity.PERFECT, 5)));
 
         addBonus(Apotheosis.loc("the_nether/blood_lord"), b -> b
                 .bonus(Comp.LootCategories.Artifice.GUN, AttributeBonus.builder()
@@ -125,8 +125,8 @@ public class ArtificeExtraGemBonusProvider extends DynamicRegistryProvider<Extra
                         .value(Purity.CHIPPED, 0.1f)
                         .value(Purity.FLAWED, 0.15f)
                         .value(Purity.NORMAL, 0.2f)
-                        .value(Purity.FLAWLESS, 0.25f)
-                        .value(Purity.PERFECT, 0.3f)));
+                        .value(Purity.FLAWLESS, 0.30f)
+                        .value(Purity.PERFECT, 0.45f)));
 
         addBonus(Apotheosis.loc("the_nether/inferno"), b -> b
                 .bonus(Comp.LootCategories.Artifice.GUN, AttributeBonus.builder()
@@ -136,16 +136,16 @@ public class ArtificeExtraGemBonusProvider extends DynamicRegistryProvider<Extra
                         .value(Purity.CHIPPED, 2)
                         .value(Purity.FLAWED, 3)
                         .value(Purity.NORMAL, 4)
-                        .value(Purity.FLAWLESS, 5)
-                        .value(Purity.PERFECT, 6)));
+                        .value(Purity.FLAWLESS, 6)
+                        .value(Purity.PERFECT, 7)));
 
         addBonus(Apotheosis.loc("the_end/mageslayer"), b -> b
                 .bonus(Comp.LootCategories.Artifice.GUN, AttributeBonus.builder()
                         .attr(ALObjects.Attributes.PROT_SHRED)
                         .op(AttributeModifier.Operation.ADD_MULTIPLIED_BASE)
                         .value(Purity.NORMAL, 0.1)
-                        .value(Purity.FLAWLESS, 0.2)
-                        .value(Purity.PERFECT, 0.3)));
+                        .value(Purity.FLAWLESS, 0.35)
+                        .value(Purity.PERFECT, 0.40)));
 
         addTwilightBonus(Apotheosis.loc("twilight/forest"), b -> b
                 .bonus(Comp.LootCategories.Artifice.GUN, AttributeBonus.builder()
@@ -162,8 +162,8 @@ public class ArtificeExtraGemBonusProvider extends DynamicRegistryProvider<Extra
                         .op(AttributeModifier.Operation.ADD_VALUE)
                         .value(Purity.FLAWED, 2)
                         .value(Purity.NORMAL, 4)
-                        .value(Purity.FLAWLESS, 6)
-                        .value(Purity.PERFECT, 8)));
+                        .value(Purity.FLAWLESS, 8)
+                        .value(Purity.PERFECT, 9.5)));
 
     }
 
