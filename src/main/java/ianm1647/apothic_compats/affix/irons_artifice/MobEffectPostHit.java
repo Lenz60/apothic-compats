@@ -3,7 +3,6 @@ package ianm1647.apothic_compats.affix.irons_artifice;
 import io.redspace.irons_artifice.entity.Bullet;
 import io.redspace.irons_artifice.modifier.PostHitEffect;
 import io.redspace.irons_artifice.utils.Utils;
-import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -14,9 +13,9 @@ import net.minecraft.world.phys.HitResult;
 public class MobEffectPostHit implements PostHitEffect {
     private int durationTicks;
     private int amplifier;
-    public Holder<MobEffect> effect;
+    public MobEffect effect;
 
-    public MobEffectPostHit(int durationTicks, int amplifier, Holder<MobEffect> effect) {
+    public MobEffectPostHit(int durationTicks, int amplifier, MobEffect effect) {
         this.durationTicks = durationTicks;
         this.amplifier = amplifier;
         this.effect = effect;
@@ -38,7 +37,7 @@ public class MobEffectPostHit implements PostHitEffect {
         return this.amplifier;
     }
 
-    public Holder<MobEffect> getEffect() {
+    public MobEffect getEffect() {
         return this.effect;
     }
 

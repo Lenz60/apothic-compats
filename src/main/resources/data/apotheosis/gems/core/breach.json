@@ -100,10 +100,10 @@
                                                     ]
                                       },
                         "attribute":  "attributeslib:crit_chance",
-                        "operation":  "ADDITION",
+                        "operation":  "MULTIPLY_BASE",
                         "values":  {
-                                       "common":  0.06,
-                                       "uncommon":  0.06,
+                                       "common":  0.02,
+                                       "uncommon":  0.04,
                                        "rare":  0.06,
                                        "epic":  0.08,
                                        "mythic":  0.1,

@@ -149,14 +149,14 @@
                                                     ]
                                       },
                         "attribute":  "attributeslib:life_steal",
-                        "operation":  "ADDITION",
+                        "operation":  "MULTIPLY_BASE",
                         "values":  {
-                                       "common":  0.10000000149011612,
-                                       "uncommon":  0.10000000149011612,
-                                       "rare":  0.15000000596046448,
-                                       "epic":  0.20000000298023224,
+                                       "common":  0.1,
+                                       "uncommon":  0.1,
+                                       "rare":  0.15,
+                                       "epic":  0.2,
                                        "mythic":  0.25,
-                                       "ancient":  0.30000001192092896
+                                       "ancient":  0.3
                                    }
                     }
                 ]

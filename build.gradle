@@ -77,6 +77,7 @@ dependencies {
     implementation fg.deobf("curse.maven:malum-484064:$malum_version")
     implementation fg.deobf("curse.maven:create-328085:$create_version")
     implementation fg.deobf("maven.modrinth:irons-artifice:$artifice_version")
+    implementation fg.deobf("curse.maven:irons-spellbooks-855414:$spellbooks_version")
 
     // runtime helpers for local testing
     implementation fg.deobf("maven.modrinth:lodestonelib:$lodestone_version")

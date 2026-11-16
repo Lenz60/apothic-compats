@@ -10,8 +10,9 @@ import dev.shadowsoffire.placebo.codec.PlaceboCodecs;
 import ianm1647.apothic_compats.Comp;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
-import net.minecraft.core.Holder;
+import io.redspace.ironsspellbooks.api.spells.CastSource;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -31,16 +32,24 @@ public class MagicalBulletAffix extends Affix {
     // Lightweight spells only — avoids heavy animation / AoE spells (blizzard, starfall, volley, etc.)
     // to prevent lag when multi-bullet guns (e.g. blunderbuss firing 20+ projectiles per shot)
     // trigger this affix on every bullet impact.
-    private static final List<Holder<AbstractSpell>> LIGHTWEIGHT_SPELLS = List.of(
-        SpellRegistry.MAGIC_ARROW_SPELL.get(),
-        SpellRegistry.FIRE_ARROW_SPELL.get(),
-        SpellRegistry.FIREBOLT_SPELL.get(),
-        SpellRegistry.ICICLE_SPELL.get(),
-        SpellRegistry.MAGIC_MISSILE_SPELL.get(),
-        SpellRegistry.GUIDING_BOLT_SPELL.get(),
-        SpellRegistry.FIRECRACKER_SPELL.get(),
-        SpellRegistry.POISON_ARROW_SPELL.get()
-    );
+    // Lazily initialized: SpellRegistry RegistryObjects are not present during mod construction.
+    private static List<AbstractSpell> lightweightSpells;
+
+    private static List<AbstractSpell> getLightweightSpells() {
+        if (lightweightSpells == null) {
+            lightweightSpells = List.of(
+                SpellRegistry.MAGIC_ARROW_SPELL.get(),
+                SpellRegistry.FIRE_ARROW_SPELL.get(),
+                SpellRegistry.FIREBOLT_SPELL.get(),
+                SpellRegistry.ICICLE_SPELL.get(),
+                SpellRegistry.MAGIC_MISSILE_SPELL.get(),
+                SpellRegistry.GUIDING_BOLT_SPELL.get(),
+                SpellRegistry.FIRECRACKER_SPELL.get(),
+                SpellRegistry.POISON_ARROW_SPELL.get()
+            );
+        }
+        return lightweightSpells;
+    }
 
     public MagicalBulletAffix(Set<LootRarity> rarities) {
         super(AffixType.ABILITY);
@@ -62,10 +71,17 @@ public class MagicalBulletAffix extends Affix {
      * Server-side only. Used when a bullet from a gun with this affix hits a target.
      */
     public static void castRandomSpell(ServerLevel level, LivingEntity shooter) {
-        if (level.isClientSide() || shooter == null || LIGHTWEIGHT_SPELLS.isEmpty()) {
+        if (level.isClientSide() || shooter == null) {
             return;
         }
-        Holder<AbstractSpell> spell = LIGHTWEIGHT_SPELLS.get(ThreadLocalRandom.current().nextInt(LIGHTWEIGHT_SPELLS.size()));
-        spell.get().cast(level, shooter, 1.0F);
+        List<AbstractSpell> spells = getLightweightSpells();
+        if (spells.isEmpty()) {
+            return;
+        }
+        if (!(shooter instanceof ServerPlayer player)) {
+            return;
+        }
+        AbstractSpell spell = spells.get(ThreadLocalRandom.current().nextInt(spells.size()));
+        spell.castSpell(level, 1, player, CastSource.NONE, false);
     }
 }

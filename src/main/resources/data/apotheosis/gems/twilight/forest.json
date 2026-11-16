@@ -154,12 +154,12 @@
                         "attribute":  "attributeslib:armor_shred",
                         "operation":  "MULTIPLY_BASE",
                         "values":  {
-                                       "common":  0.05000000074505806,
-                                       "uncommon":  0.05000000074505806,
-                                       "rare":  0.05000000074505806,
-                                       "epic":  0.10000000149011612,
-                                       "mythic":  0.15000000596046448,
-                                       "ancient":  0.20000000298023224
+                                       "common":  0.05,
+                                       "uncommon":  0.05,
+                                       "rare":  0.05,
+                                       "epic":  0.1,
+                                       "mythic":  0.15,
+                                       "ancient":  0.2
                                    }
                     }
                 ]

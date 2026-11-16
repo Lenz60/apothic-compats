@@ -9,6 +9,7 @@ import io.redspace.irons_artifice.api.AmmoEvent;
 import io.redspace.irons_artifice.api.BulletImpactEvent;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
 import io.redspace.irons_artifice.entity.Bullet;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -42,7 +43,7 @@ public class ArtificeAffixEvents {
         var affixes = ianm1647.apothic_compats.ApothicCompats.streamEntityAffixes(bullet).toList();
         for (var inst : affixes) {
             if (inst.affix().get() instanceof MagicalBulletAffix) {
-                MagicalBulletAffix.castRandomSpell(shooter.level(), shooter);
+                MagicalBulletAffix.castRandomSpell((ServerLevel) shooter.level(), shooter);
                 break;
             }
         }
