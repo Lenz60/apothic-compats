@@ -43,7 +43,7 @@ public class ArtificeAffixEvents {
         var affixes = ianm1647.apothic_compats.ApothicCompats.streamEntityAffixes(bullet).toList();
         for (var inst : affixes) {
             if (inst.affix().get() instanceof MagicalBulletAffix) {
-                MagicalBulletAffix.castRandomSpell((ServerLevel) shooter.level(), shooter);
+                MagicalBulletAffix.triggerProc((ServerLevel) shooter.level(), shooter, inst);
                 break;
             }
         }

@@ -3,6 +3,7 @@ package ianm1647.apothic_compats.affix.irons_artifice;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.shadowsoffire.apotheosis.adventure.affix.Affix;
+import dev.shadowsoffire.apotheosis.adventure.affix.AffixInstance;
 import dev.shadowsoffire.apotheosis.adventure.affix.AffixType;
 import dev.shadowsoffire.apotheosis.adventure.loot.LootCategory;
 import dev.shadowsoffire.apotheosis.adventure.loot.LootRarity;
@@ -16,7 +17,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -27,28 +27,35 @@ public class MagicalBulletAffix extends Affix {
             PlaceboCodecs.setOf(LootRarity.CODEC).fieldOf("rarities").forGetter(a -> a.rarities))
         .apply(inst, MagicalBulletAffix::new));
 
+    private enum ProcOutcome {
+        DAMAGE,
+        BUFF,
+        DEBUFF
+    }
+
+    private record ProcProfile(int damageWeight, int buffWeight, int debuffWeight, int minLevel, int maxLevel) {
+        int totalWeight() {
+            return damageWeight + buffWeight + debuffWeight;
+        }
+    }
+
     protected final Set<LootRarity> rarities;
 
-    // Lightweight spells only — avoids heavy animation / AoE spells (blizzard, starfall, volley, etc.)
-    // to prevent lag when multi-bullet guns (e.g. blunderbuss firing 20+ projectiles per shot)
-    // trigger this affix on every bullet impact.
-    // Lazily initialized: SpellRegistry RegistryObjects are not present during mod construction.
-    private static List<AbstractSpell> lightweightSpells;
-
-    private static List<AbstractSpell> getLightweightSpells() {
-        if (lightweightSpells == null) {
-            lightweightSpells = List.of(
-                SpellRegistry.MAGIC_ARROW_SPELL.get(),
-                SpellRegistry.FIRE_ARROW_SPELL.get(),
-                SpellRegistry.FIREBOLT_SPELL.get(),
-                SpellRegistry.ICICLE_SPELL.get(),
-                SpellRegistry.MAGIC_MISSILE_SPELL.get(),
-                SpellRegistry.GUIDING_BOLT_SPELL.get(),
-                SpellRegistry.FIRECRACKER_SPELL.get(),
-                SpellRegistry.POISON_ARROW_SPELL.get()
-            );
+    private static ProcProfile getProcProfile(LootRarity rarity) {
+        int ordinal = rarity.ordinal();
+        if (ordinal <= 0) {
+            return new ProcProfile(80, 12, 8, 2, 3);
         }
-        return lightweightSpells;
+        if (ordinal == 1) {
+            return new ProcProfile(75, 15, 10, 2, 3);
+        }
+        if (ordinal == 2) {
+            return new ProcProfile(70, 18, 12, 3, 4);
+        }
+        if (ordinal == 3) {
+            return new ProcProfile(65, 22, 13, 4, 5);
+        }
+        return new ProcProfile(60, 25, 15, 5, 6);
     }
 
     public MagicalBulletAffix(Set<LootRarity> rarities) {
@@ -66,22 +73,34 @@ public class MagicalBulletAffix extends Affix {
         return CODEC;
     }
 
-    /**
-     * Casts a random lightweight spell from the shooter.
-     * Server-side only. Used when a bullet from a gun with this affix hits a target.
-     */
-    public static void castRandomSpell(ServerLevel level, LivingEntity shooter) {
-        if (level.isClientSide() || shooter == null) {
+    public static void triggerProc(ServerLevel level, LivingEntity shooter, AffixInstance inst) {
+        if (level == null || level.isClientSide() || shooter == null || !(shooter instanceof ServerPlayer player)) {
             return;
         }
-        List<AbstractSpell> spells = getLightweightSpells();
-        if (spells.isEmpty()) {
-            return;
+
+        LootRarity rarity = inst.rarity().get();
+        ProcProfile profile = getProcProfile(rarity);
+
+        ProcOutcome outcome = selectOutcome(profile);
+        int spellLevel = ThreadLocalRandom.current().nextInt(profile.minLevel(), profile.maxLevel() + 1);
+        AbstractSpell spell = switch (outcome) {
+            case DAMAGE -> SpellRegistry.GUIDING_BOLT_SPELL.get();
+            case BUFF -> SpellRegistry.HASTE_SPELL.get();
+            case DEBUFF -> SpellRegistry.ROOT_SPELL.get();
+        };
+
+        spell.castSpell(level, spellLevel, player, CastSource.NONE, true);
+    }
+
+    private static ProcOutcome selectOutcome(ProcProfile profile) {
+        int roll = ThreadLocalRandom.current().nextInt(profile.totalWeight());
+        if (roll < profile.damageWeight()) {
+            return ProcOutcome.DAMAGE;
         }
-        if (!(shooter instanceof ServerPlayer player)) {
-            return;
+        roll -= profile.damageWeight();
+        if (roll < profile.buffWeight()) {
+            return ProcOutcome.BUFF;
         }
-        AbstractSpell spell = spells.get(ThreadLocalRandom.current().nextInt(spells.size()));
-        spell.castSpell(level, 1, player, CastSource.NONE, false);
+        return ProcOutcome.DEBUFF;
     }
 }

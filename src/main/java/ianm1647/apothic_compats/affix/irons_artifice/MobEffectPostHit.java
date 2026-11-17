@@ -5,20 +5,21 @@ import io.redspace.irons_artifice.modifier.PostHitEffect;
 import io.redspace.irons_artifice.utils.Utils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.HitResult;
 
 public class MobEffectPostHit implements PostHitEffect {
+    private final MobEffect effect;
     private int durationTicks;
     private int amplifier;
-    public MobEffect effect;
 
-    public MobEffectPostHit(int durationTicks, int amplifier, MobEffect effect) {
+    public MobEffectPostHit(MobEffect effect, int durationTicks, int amplifier) {
+        this.effect = effect;
         this.durationTicks = durationTicks;
         this.amplifier = amplifier;
-        this.effect = effect;
     }
 
     public void addDuration(int ticks) {
@@ -41,15 +42,19 @@ public class MobEffectPostHit implements PostHitEffect {
         return this.effect;
     }
 
+    @Override
     public void postHit(ServerLevel level, Bullet bullet, HitResult hitResult, Entity entity) {
-        if (entity instanceof LivingEntity living) {
-            if (Utils.canHarm(bullet.getOwner(), entity)) {
-                MobEffectInstance existing = living.getEffect(this.effect);
-                int duration = this.durationTicks + (existing != null ? existing.getDuration() : 0);
-                int amp = existing != null ? Math.max(existing.getAmplifier(), this.amplifier) : this.amplifier;
-                living.addEffect(new MobEffectInstance(this.effect, Math.min(duration, 600), Math.max(0, amp)), bullet.getOwner());
-            }
+        if (!(entity instanceof LivingEntity living)) {
+            return;
         }
 
+        if (this.effect.getCategory() == MobEffectCategory.HARMFUL && !Utils.canHarm(bullet.getOwner(), entity)) {
+            return;
+        }
+
+        MobEffectInstance existing = living.getEffect(this.effect);
+        int duration = Math.max(this.durationTicks, existing != null ? existing.getDuration() : 0);
+        int amp = Math.max(this.amplifier, existing != null ? existing.getAmplifier() : 0);
+        living.addEffect(new MobEffectInstance(this.effect, duration, amp), bullet.getOwner());
     }
 }
