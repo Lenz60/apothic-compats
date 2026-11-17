@@ -25,6 +25,7 @@
     },
     "player_animations": false,
     "spell": "irons_spellbooks:root",
+    "target": "TARGET",
     "trigger": "projectile_hit",
     "types": [
         "apothic_compats:gun"

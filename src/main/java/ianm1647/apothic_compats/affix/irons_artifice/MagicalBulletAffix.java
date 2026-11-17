@@ -9,11 +9,16 @@ import dev.shadowsoffire.apotheosis.adventure.loot.LootCategory;
 import dev.shadowsoffire.apotheosis.adventure.loot.LootRarity;
 import dev.shadowsoffire.placebo.codec.PlaceboCodecs;
 import ianm1647.apothic_compats.Comp;
+import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
+import io.redspace.ironsspellbooks.capabilities.magic.TargetEntityCastData;
+import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
+import io.redspace.ironsspellbooks.util.ModTags;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -73,7 +78,7 @@ public class MagicalBulletAffix extends Affix {
         return CODEC;
     }
 
-    public static void triggerProc(ServerLevel level, LivingEntity shooter, AffixInstance inst) {
+    public static void triggerProc(ServerLevel level, LivingEntity shooter, LivingEntity target, AffixInstance inst) {
         if (level == null || level.isClientSide() || shooter == null || !(shooter instanceof ServerPlayer player)) {
             return;
         }
@@ -89,7 +94,23 @@ public class MagicalBulletAffix extends Affix {
             case DEBUFF -> SpellRegistry.ROOT_SPELL.get();
         };
 
-        spell.castSpell(level, spellLevel, player, CastSource.NONE, true);
+        switch (outcome) {
+            case BUFF -> {
+                // Haste: self-targeted, instant cast on the shooter
+                int duration = (int) (spell.getSpellPower(spellLevel, player) * 20);
+                int amplifier = spellLevel - 1;
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.HASTENED.get(), duration, amplifier));
+            }
+            case DEBUFF -> {
+                // Root: target the entity hit by the bullet, works at gun range
+                if (target != null && !target.getType().is(ModTags.CANT_ROOT)) {
+                    MagicData magicData = MagicData.getPlayerMagicData(player);
+                    magicData.setAdditionalCastData(new TargetEntityCastData(target));
+                    spell.castSpell(level, spellLevel, player, CastSource.NONE, true);
+                }
+            }
+            case DAMAGE -> spell.castSpell(level, spellLevel, player, CastSource.NONE, true);
+        }
     }
 
     private static ProcOutcome selectOutcome(ProcProfile profile) {

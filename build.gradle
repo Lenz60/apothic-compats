@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
     id 'idea'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.2.0'
 }
 
 version = mod_version
@@ -39,6 +39,11 @@ jar {
 repositories {
     mavenLocal()
     mavenCentral()
+
+    maven {
+        name = 'ParchmentMC'
+        url = 'https://maven.parchmentmc.org'
+    }
     maven {
         url 'https://www.cursemaven.com'
         content { includeGroup 'curse.maven' }
@@ -93,6 +98,7 @@ dependencies {
     implementation fg.deobf("curse.maven:l2library-620203:$l2library_version")
     // implementation fg.deobf('dev.xkmc.l2serial:l2serial:1.2.2')
     implementation fg.deobf('curse.maven:l2complements-758349:7606338')
+    // implementation fg.deobf('dev.xkmc.l2tabs:l2tabs:0.3.3')
     implementation fg.deobf('curse.maven:l2hostility-909207:7815389')
 
     // Dev Env Mods
