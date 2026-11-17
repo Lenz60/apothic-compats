@@ -8,6 +8,7 @@ import dev.shadowsoffire.apotheosis.adventure.loot.LootRarity;
 import dev.shadowsoffire.apotheosis.adventure.loot.RarityRegistry;
 import dev.shadowsoffire.placebo.reload.DynamicHolder;
 import ianm1647.apothic_compats.affix.ModAffixRegistry;
+import ianm1647.apothic_compats.gem.l2hostility.HostilityGemBonuses;
 import ianm1647.apothic_compats.event.AffixEvents;
 import ianm1647.apothic_compats.event.AttributeEvents;
 import ianm1647.apothic_compats.event.irons_artifice.ArtificeAffixEvents;
@@ -29,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -70,6 +72,18 @@ public class ApothicCompats {
         Comp.bootstrap(modEventBus);
 
         ModAffixRegistry.registerAffixes();
+        if (ModList.get().isLoaded("l2hostility")) {
+            modEventBus.addListener(this::registerHostilityGemBonuses);
+        }
+    }
+
+    private void registerHostilityGemBonuses(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            dev.shadowsoffire.apotheosis.adventure.socket.gem.bonus.GemBonus.CODEC.register(
+                    loc("dispell_resist"), HostilityGemBonuses.DispellResist.CODEC);
+            dev.shadowsoffire.apotheosis.adventure.socket.gem.bonus.GemBonus.CODEC.register(
+                    loc("ragnarok_resist"), HostilityGemBonuses.RagnarokResist.CODEC);
+        });
     }
 
     public static ResourceLocation loc(String path) {

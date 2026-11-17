@@ -6,6 +6,7 @@ import ianm1647.apothic_compats.affix.aether.MagicalDartAffix;
 import ianm1647.apothic_compats.affix.create.MagicalPotatoAffix;
 import ianm1647.apothic_compats.affix.irons_artifice.*;
 import ianm1647.apothic_compats.affix.malum.*;
+import ianm1647.apothic_compats.affix.l2hostility.DifficultyLevelAffix;
 import net.minecraftforge.fml.ModList;
 
 public class ModAffixRegistry {
@@ -27,6 +28,9 @@ public class ModAffixRegistry {
         if (ModList.get().isLoaded("malum")) {
             AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("scythe_cleaving"), ScytheCleavingAffix.CODEC);
             AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("staff_cleaving"), StaffCleavingAffix.CODEC);
+        }
+        if (ModList.get().isLoaded("l2hostility")) {
+            AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("difficulty_level"), DifficultyLevelAffix.CODEC);
         }
         if (ModList.get().isLoaded("curios")) {
             AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("curio_attribute"), CurioAttributeAffix.CODEC);

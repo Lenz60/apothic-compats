@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "ianm1647.apothic_compats.mixin.l2hostility",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "apothic_compats.refmap.json",
+  "mixins": [
+    "DispellTraitMixin",
+    "RagnarokTraitMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
