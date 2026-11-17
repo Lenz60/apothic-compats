@@ -1,5 +1,19 @@
 {
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "l2hostility"
+    }
+  ],
   "type": "apothic_compats:difficulty_level",
+  "definition": {
+    "affix_type": "ability",
+    "exclusive_set": [],
+    "weights": {
+      "quality": 0.1,
+      "weight": 25
+    }
+  },
   "values": {
     "rare": {
       "bonus": {
@@ -40,6 +54,7 @@
     "bow",
     "crossbow",
     "trident",
-    "shield"
+    "shield",
+    "gun"
   ]
 }

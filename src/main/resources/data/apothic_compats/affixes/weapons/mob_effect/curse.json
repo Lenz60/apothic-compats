@@ -1,4 +1,10 @@
 {
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "l2complements"
+    }
+  ],
   "type": "apotheosis:mob_effect",
   "mob_effect": "l2complements:curse",
   "target": "ATTACK_TARGET",
@@ -31,9 +37,5 @@
       "cooldown": 260
     }
   },
-  "types": [
-    "sword",
-    "trident",
-    "heavy_weapon"
-  ]
+  "types": ["sword", "trident", "heavy_weapon", "gun"]
 }

@@ -21,8 +21,6 @@
 
   "curios.modifiers.feet": "When on feet",
 
-
-
   "gem_class.dart_shooter": "Dart Shooter",
   "loot_category.apothic_compats.dart_shooter": "Dart Shooter",
   "loot_category.apothic_compats.dart_shooter.plural": "Dart Shooters",
@@ -75,8 +73,7 @@
   "loot_category.apothic_compats.rune": "Rune",
   "loot_category.apothic_compats.rune.plural": "Runes",
 
-
-  "affix_header":  "AFFIXES",
+  "affix_header": "AFFIXES",
 
   "affix.apothic_compats:melee/bloodied": "Bloody",
   "affix.apothic_compats:melee/bloodied.suffix": "of Flesh",
@@ -221,9 +218,7 @@
   "affix.apothic_compats:ranged/mob_effect/gooey.suffix": "of Stickiness",
   "affix.apothic_compats:ranged/mob_effect/ancient/gooey.suffix": "of Stickiness",
 
-
-
-  "curios_header":  "CURIOS",
+  "curios_header": "CURIOS",
 
   "affix.apothic_compats:curios/attribute/mana": "Mana-Touched",
   "affix.apothic_compats:curios/attribute/mana.suffix": "of Sorcery",
@@ -385,8 +380,7 @@
   "affix.apothic_compats:curios/attribute/ancient/destructive": "Destructive",
   "affix.apothic_compats:curios/attribute/ancient/destructive.suffix": "of Quarrying",
 
-
-  "dart_shooter_header":  "DART SHOOTER",
+  "dart_shooter_header": "DART SHOOTER",
 
   "affix.apothic_compats:dart_shooter/magical": "Magical",
   "affix.apothic_compats:dart_shooter/magical.suffix": "of the Arcane",
@@ -486,8 +480,7 @@
   "affix.apothic_compats:dart_shooter/enchantment/ancient/prosperous": "Prosperous",
   "affix.apothic_compats:dart_shooter/enchantment/ancient/prosperous.suffix": "of the Treasure-Seeker",
 
-
-  "potato_cannon_header":  "POTATO CANNON",
+  "potato_cannon_header": "POTATO CANNON",
 
   "affix.apothic_compats:potato_cannon/magical": "Magical",
   "affix.apothic_compats:potato_cannon/magical.suffix": "of the Arcane",
@@ -586,8 +579,7 @@
   "affix.apothic_compats:potato_cannon/enchantment/ancient/reclaimed": "Reclaimed",
   "affix.apothic_compats:potato_cannon/enchantment/ancient/reclaimed.suffix": "of the Redeemer",
 
-
-  "staff_header_ranged":  "STAFF RANGED",
+  "staff_header_ranged": "STAFF RANGED",
 
   "affix.apothic_compats:staff/ranged/attribute/windswept": "Windswept",
   "affix.apothic_compats:staff/ranged/attribute/windswept.suffix": "of the Current",
@@ -643,8 +635,6 @@
   "affix.apothic_compats:staff/ranged/enchantment/prosperous.suffix": "of the Treasure-Seeker",
   "affix.apothic_compats:staff/ranged/enchantment/ancient/prosperous": "Prosperous",
   "affix.apothic_compats:staff/ranged/enchantment/ancient/prosperous.suffix": "of the Treasure-Seeker",
-
-
 
   "affix.apothic_compats:staff/attribute/intricate": "Intricate",
   "affix.apothic_compats:staff/attribute/intricate.suffix": "of Critical Thinking",
@@ -708,8 +698,7 @@
   "affix.apothic_compats:staff/ancient/thunderstruck.suffix": "of the Storm",
   "affix.apothic_compats:staff/ancient/thunderstruck.desc": "Your attacks deal %s damage to nearby enemies.",
 
-
-  "staff_header_melee":  "STAFF MELEE",
+  "staff_header_melee": "STAFF MELEE",
 
   "affix.apothic_compats:staff/melee/attribute/vandalous": "Vandalous",
   "affix.apothic_compats:staff/melee/attribute/ancient/vandalous": "Vandalous",
@@ -841,8 +830,7 @@
   "affix.apothic_compats:staff/melee/mob_effect/ancient/weakening": "Weakening",
   "affix.apothic_compats:staff/melee/mob_effect/ancient/weakening.suffix": "of Weakness",
 
-
-  "scythe_header":  "SCYTHE",
+  "scythe_header": "SCYTHE",
 
   "affix.apothic_compats:scythe/melee/attribute/vandalous": "Vandalous",
   "affix.apothic_compats:scythe/melee/attribute/ancient/vandalous": "Vandalous",
@@ -1011,7 +999,6 @@
   "affix.apothic_compats:scythe/ancient/thunderstruck": "Thunderstruck",
   "affix.apothic_compats:scythe/ancient/thunderstruck.suffix": "of the Storm",
   "affix.apothic_compats:scythe/ancient/thunderstruck.desc": "Your attacks deal %s damage to nearby enemies.",
-
 
   "gun_header": "GUN",
 
@@ -1262,5 +1249,15 @@
   "affix.apothic_compats:gun/spell/shockwave": "Supersonic",
   "affix.apothic_compats:gun/spell/shockwave.suffix": "of Power",
   "affix.apothic_compats:gun/spell/ancient/shockwave": "Supersonic",
-  "affix.apothic_compats:gun/spell/ancient/shockwave.suffix": "of Power"
+  "affix.apothic_compats:gun/spell/ancient/shockwave.suffix": "of Power",
+
+  "affix.apothic_compats.armor_reduce": "Armor Reducing",
+  "affix.apothic_compats.armor_reduce.suffix": "of Piercing Armor",
+  "affix.apothic_compats.armor_reduce.desc": "Your attacks reduce the target's armor by %s.",
+  "affix.apothic_compats.curse": "Cursed",
+  "affix.apothic_compats.curse.suffix": "of Misfortune",
+  "affix.apothic_compats.curse.desc": "Inflicts a lingering curse on your target, causing them to take %s more damage.",
+  "affix.apothic_compats.frozen": "Glacial",
+  "affix.apothic_compats.frozen.suffix": "of Permafrost",
+  "affix.apothic_compats.frozen.desc": "Your attacks freeze the target in place for %s seconds."
 }
