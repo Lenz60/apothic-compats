@@ -16,14 +16,15 @@ import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.capabilities.magic.TargetEntityCastData;
 import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
-import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ModTags;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -36,24 +37,93 @@ public class MagicalBulletAffix extends Affix {
 
     /**
      * NBT key on the target storing the game tick when a crowd-control debuff
-     * (Gust/Root) was last applied by this affix.
+     * (Gust/Root/Slow) was last applied by this affix.
      */
     private static final String LAST_DEBUFF_TICK_KEY = "apothic_compats_magical_bullet_debuff_tick";
 
     /**
-     * Bullets from one shot (shotgun pellets, etc.) land on the same tick, so any
-     * debuff applied within this window counts as "already debuffed by this shot".
+     * NBT key on the shooter storing the game tick when Arrow Volley was last cast
+     * by this affix.
+     */
+    private static final String LAST_VOLLEY_TICK_KEY = "apothic_compats_magical_bullet_volley_tick";
+
+    /**
+     * Bullets from one shot (shotgun pellets, etc.) land on the same tick, so
+     * anything
+     * applied within this window counts as "already handled by this shot".
      */
     private static final long SHOT_WINDOW_TICKS = 2L;
+
+    /** Difficulty levels needed for +1 spell level. */
+    private static final int DIFFICULTY_PER_SPELL_LEVEL = 100;
+
+    private static final String ARROW_VOLLEY_ID = "arrow_volley";
+    private static final String GUIDING_BOLT_ID = "guiding_bolt";
 
     private enum ProcOutcome {
         DAMAGE,
         BUFF,
-        GUST,
-        ROOT
+        DEBUFF
     }
 
-    private record ProcProfile(int damageWeight, int buffWeight, int debuffWeight, int minLevel, int maxLevel) {
+    /**
+     * A spell that can be rolled. If minLevel == maxLevel it is a fixed level and
+     * never scales.
+     * damageMultiplier is only used by direct-damage spells (spell power *
+     * multiplier).
+     */
+    private record SpellEntry(String id, int minLevel, int maxLevel, float damageMultiplier) {
+        SpellEntry(String id, int level) {
+            this(id, level, level, 0.5f);
+        }
+
+        SpellEntry(String id, int minLevel, int maxLevel) {
+            this(id, minLevel, maxLevel, 0.5f);
+        }
+
+        AbstractSpell spell() {
+            AbstractSpell spell = SpellRegistry.getSpell(new ResourceLocation("irons_spellbooks", id));
+            return spell == SpellRegistry.none() ? null : spell;
+        }
+
+        /**
+         * Difficulty 1-100 -> min level, 101-200 -> min+1, ... capped at maxLevel.
+         * (e.g. level 3-5: difficulty 100 -> 3, difficulty 150 -> 4)
+         */
+        int resolveLevel(int difficulty) {
+            if (maxLevel <= minLevel) {
+                return minLevel;
+            }
+            int bonus = difficulty <= 0 ? 0 : (difficulty - 1) / DIFFICULTY_PER_SPELL_LEVEL;
+            return Math.min(maxLevel, minLevel + bonus);
+        }
+    }
+
+    private static final List<SpellEntry> DAMAGE_SPELLS = List.of(
+            new SpellEntry(GUIDING_BOLT_ID, 5, 10),
+            new SpellEntry("fireball", 3, 5),
+            new SpellEntry("magic_missile", 5, 10),
+            new SpellEntry("blood_needles", 5, 10),
+            new SpellEntry("lightning_bolt", 5, 10),
+            new SpellEntry(ARROW_VOLLEY_ID, 4, 6),
+            new SpellEntry("eldritch_blast", 3, 5));
+
+    private static final List<SpellEntry> BUFF_SPELLS = List.of(
+            new SpellEntry("fortify", 10),
+            new SpellEntry("oakskin", 8),
+            new SpellEntry("charge", 3));
+
+    private static final List<SpellEntry> DEBUFF_SPELLS = List.of(
+            new SpellEntry("slow", 4, 6),
+            new SpellEntry("gust", 6, 10),
+            new SpellEntry("root", 5, 10));
+
+    /**
+     * Outcome weights per rarity. haste* is the original Haste buff, which stays in
+     * the buff pool
+     * and keeps its original rarity-based level range.
+     */
+    private record ProcProfile(int damageWeight, int buffWeight, int debuffWeight, int hasteMin, int hasteMax) {
         int totalWeight() {
             return damageWeight + buffWeight + debuffWeight;
         }
@@ -90,24 +160,16 @@ public class MagicalBulletAffix extends Affix {
         }
 
         ProcProfile profile = getProcProfile(inst.rarity().get());
+        int difficulty = HostilityCompat.getPlayerDifficulty(player);
 
-        // A debuff (Gust/Root) is only allowed if the target has a valid hit and is
-        // not already debuffed. Otherwise this bullet falls back to damage/buff.
+        // A debuff is only allowed if the target has a valid hit and is not already
+        // debuffed. Otherwise this bullet falls back to damage/buff.
         boolean debuffAllowed = target != null && !hasActiveDebuff(level, target);
 
-        ProcOutcome outcome = selectOutcome(profile, debuffAllowed);
-        int spellLevel = ThreadLocalRandom.current().nextInt(profile.minLevel(), profile.maxLevel() + 1);
-
-        switch (outcome) {
-            case BUFF -> applyBuff(player, spellLevel);
-            case DAMAGE -> applyDamage(player, target, spellLevel);
-            case GUST -> applyGust(level, player, target);
-            case ROOT -> {
-                if (!applyRoot(level, player, target)) {
-                    // Target can't be rooted: don't waste the proc, deal damage instead
-                    applyDamage(player, target, spellLevel);
-                }
-            }
+        switch (selectOutcome(profile, debuffAllowed)) {
+            case BUFF -> applyRandomBuff(level, player, profile, difficulty);
+            case DAMAGE -> applyRandomDamage(level, player, target, difficulty);
+            case DEBUFF -> applyRandomDebuff(level, player, target, difficulty);
         }
     }
 
@@ -119,8 +181,6 @@ public class MagicalBulletAffix extends Affix {
         ThreadLocalRandom random = ThreadLocalRandom.current();
 
         if (!debuffAllowed) {
-            // Target already debuffed (or no target): re-roll between damage and buff only,
-            // keeping their relative weights.
             int roll = random.nextInt(profile.nonDebuffWeight());
             return roll < profile.damageWeight() ? ProcOutcome.DAMAGE : ProcOutcome.BUFF;
         }
@@ -133,8 +193,7 @@ public class MagicalBulletAffix extends Affix {
         if (roll < profile.buffWeight()) {
             return ProcOutcome.BUFF;
         }
-        // Debuff slice: 50% Gust, 50% Root
-        return random.nextBoolean() ? ProcOutcome.GUST : ProcOutcome.ROOT;
+        return ProcOutcome.DEBUFF;
     }
 
     private static ProcProfile getProcProfile(LootRarity rarity) {
@@ -155,7 +214,7 @@ public class MagicalBulletAffix extends Affix {
     }
 
     // -------------------------------------------------------------------------
-    // Debuff tracking (anti-stacking)
+    // Anti-stacking
     // -------------------------------------------------------------------------
 
     private static boolean hasActiveDebuff(ServerLevel level, LivingEntity target) {
@@ -163,7 +222,7 @@ public class MagicalBulletAffix extends Affix {
         if (target.getVehicle() instanceof RootEntity) {
             return true;
         }
-        // Gust is instant, so track it by tick. Covers multiple bullets of one shot.
+        // Gust/Slow: track by tick. Covers multiple bullets of one shot.
         long lastTick = target.getPersistentData().getLong(LAST_DEBUFF_TICK_KEY);
         return lastTick > 0 && level.getGameTime() - lastTick <= SHOT_WINDOW_TICKS;
     }
@@ -174,11 +233,90 @@ public class MagicalBulletAffix extends Affix {
         }
     }
 
+    /**
+     * Arrow Volley may only be cast once per shot, no matter how many bullets the
+     * shot has.
+     */
+    private static boolean isVolleyAllowed(ServerLevel level, ServerPlayer player) {
+        long lastTick = player.getPersistentData().getLong(LAST_VOLLEY_TICK_KEY);
+        return !(lastTick > 0 && level.getGameTime() - lastTick <= SHOT_WINDOW_TICKS);
+    }
+
+    private static void markVolley(ServerLevel level, ServerPlayer player) {
+        player.getPersistentData().putLong(LAST_VOLLEY_TICK_KEY, level.getGameTime());
+    }
+
     // -------------------------------------------------------------------------
-    // Effects
+    // Damage
     // -------------------------------------------------------------------------
 
-    private static void applyBuff(ServerPlayer player, int spellLevel) {
+    private static void applyRandomDamage(ServerLevel level, ServerPlayer player, LivingEntity target, int difficulty) {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+
+        // Roll the spell. If Arrow Volley was already cast by this shot, re-roll among
+        // the others.
+        boolean volleyAllowed = isVolleyAllowed(level, player);
+        List<SpellEntry> pool = DAMAGE_SPELLS.stream()
+                .filter(e -> volleyAllowed || !e.id().equals(ARROW_VOLLEY_ID))
+                .toList();
+        SpellEntry entry = pool.get(random.nextInt(pool.size()));
+
+        AbstractSpell spell = entry.spell();
+        if (spell == null) {
+            return; // spell not present in this Iron's Spellbooks version
+        }
+        int spellLevel = entry.resolveLevel(difficulty);
+
+        if (entry.id().equals(ARROW_VOLLEY_ID)) {
+            // The one damage spell that keeps its real cast + animation
+            markVolley(level, player);
+            spell.castSpell(level, spellLevel, player, CastSource.NONE, true);
+            return;
+        }
+
+        if (target == null) {
+            return;
+        }
+
+        // Direct damage, no projectile/AoE entity and no cast animation (avoids server
+        // lag): sound only
+        float damage = spell.getSpellPower(spellLevel, player) * entry.damageMultiplier();
+        target.invulnerableTime = 0; // the bullet itself just hit, don't let i-frames swallow the proc
+        target.hurt(spell.getDamageSource(player), damage);
+        spell.getCastFinishSound().ifPresent(sound -> target.playSound(sound, 1.0f, 1.0f));
+
+        if (entry.id().equals(GUIDING_BOLT_ID)) {
+            // Guiding bolt debuff (slows and magnetizes). This is an effect, not the
+            // Gust/Root/Slow crowd-control, so it is intentionally not part of the
+            // anti-stack gate.
+            target.addEffect(new MobEffectInstance(MobEffectRegistry.GUIDING_BOLT.get(), 20 * 30, spellLevel - 1));
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Buffs
+    // -------------------------------------------------------------------------
+
+    private static void applyRandomBuff(ServerLevel level, ServerPlayer player, ProcProfile profile, int difficulty) {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+
+        // Pool = Haste (original) + Fortify / Oakskin / Charge
+        int roll = random.nextInt(BUFF_SPELLS.size() + 1);
+        if (roll == BUFF_SPELLS.size()) {
+            applyHaste(player, random.nextInt(profile.hasteMin(), profile.hasteMax() + 1));
+            return;
+        }
+
+        SpellEntry entry = BUFF_SPELLS.get(roll);
+        AbstractSpell spell = entry.spell();
+        if (spell == null) {
+            return;
+        }
+        // Self-targeted buff, fixed level
+        spell.castSpell(level, entry.resolveLevel(difficulty), player, CastSource.NONE, true);
+    }
+
+    private static void applyHaste(ServerPlayer player, int spellLevel) {
         // Haste: self-targeted, instant on the shooter
         AbstractSpell spell = SpellRegistry.HASTE_SPELL.get();
         int duration = (int) (spell.getSpellPower(spellLevel, player) * 20);
@@ -186,38 +324,42 @@ public class MagicalBulletAffix extends Affix {
         player.addEffect(new MobEffectInstance(MobEffectRegistry.HASTENED.get(), duration, amplifier));
     }
 
-    private static void applyDamage(ServerPlayer player, LivingEntity target, int spellLevel) {
-        if (target == null) {
+    // -------------------------------------------------------------------------
+    // Debuffs
+    // -------------------------------------------------------------------------
+
+    private static void applyRandomDebuff(ServerLevel level, ServerPlayer player, LivingEntity target, int difficulty) {
+        SpellEntry entry = DEBUFF_SPELLS.get(ThreadLocalRandom.current().nextInt(DEBUFF_SPELLS.size()));
+        AbstractSpell spell = entry.spell();
+        if (spell == null || target == null) {
+            applyRandomDamage(level, player, target, difficulty);
             return;
         }
-        // Direct damage, no GuidingBoltProjectile entity (avoids server lag)
-        AbstractSpell spell = SpellRegistry.GUIDING_BOLT_SPELL.get();
-        float damage = spell.getSpellPower(spellLevel, player) * 0.5f;
-        target.hurt(player.damageSources().magic(), damage);
-        target.playSound(SoundRegistry.GUIDING_BOLT_CAST.get(), 1.0f, 1.0f);
-        // Guiding bolt debuff (slows and magnetizes). This is an effect, not the
-        // Gust/Root crowd-control, so it is intentionally not part of the anti-stack
-        // gate.
-        target.addEffect(new MobEffectInstance(MobEffectRegistry.GUIDING_BOLT.get(), 20 * 30, spellLevel - 1));
-    }
+        int spellLevel = entry.resolveLevel(difficulty);
 
-    private static void applyGust(ServerLevel level, ServerPlayer player, LivingEntity target) {
-        // AoE knockback at level 6, no targeting data needed
-        SpellRegistry.GUST_SPELL.get().castSpell(level, 10, player, CastSource.NONE, true);
-        markDebuffed(level, target);
-    }
-
-    /**
-     * @return true if root was cast, false if the target is immune to it
-     */
-    private static boolean applyRoot(ServerLevel level, ServerPlayer player, LivingEntity target) {
-        if (target.getType().is(ModTags.CANT_ROOT)) {
-            return false;
+        switch (entry.id()) {
+            case "gust" -> {
+                // AoE knockback, no targeting data needed
+                spell.castSpell(level, spellLevel, player, CastSource.NONE, true);
+                markDebuffed(level, target);
+            }
+            case "root" -> {
+                if (target.getType().is(ModTags.CANT_ROOT)) {
+                    // Target can't be rooted: don't waste the proc, deal damage instead
+                    applyRandomDamage(level, player, target, difficulty);
+                    return;
+                }
+                castTargeted(level, player, target, spell, spellLevel);
+            }
+            default -> castTargeted(level, player, target, spell, spellLevel); // slow
         }
+    }
+
+    private static void castTargeted(ServerLevel level, ServerPlayer player, LivingEntity target, AbstractSpell spell,
+            int spellLevel) {
         MagicData magicData = MagicData.getPlayerMagicData(player);
         magicData.setAdditionalCastData(new TargetEntityCastData(target));
-        SpellRegistry.ROOT_SPELL.get().castSpell(level, 5, player, CastSource.NONE, true);
+        spell.castSpell(level, spellLevel, player, CastSource.NONE, true);
         markDebuffed(level, target);
-        return true;
     }
 }
