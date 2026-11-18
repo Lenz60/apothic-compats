@@ -12,6 +12,15 @@
     "gun"
   ],
   "values": {
+    "rare": {
+      "duration": {
+        "step": 20,
+        "min": 20,
+        "steps": 3
+      },
+      "cooldown": 140,
+      "amplifier": 0.0
+    },
     "mythic": {
       "duration": {
         "step": 20,

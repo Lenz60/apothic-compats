@@ -73,6 +73,7 @@ public class BulletModifierAffix extends Affix {
 
     @Override
     public boolean canApplyTo(ItemStack stack, LootCategory cat, LootRarity rarity) {
+        if (cat == null || cat.isNone() || rarity == null) return false;
         return (this.types.isEmpty() || this.types.contains(cat)) && this.values.containsKey(rarity);
     }
 
@@ -156,7 +157,7 @@ public class BulletModifierAffix extends Affix {
         }
     }
 
-    public static enum Target {
+    public enum Target {
         BULLET_SELF("bullet_self"),
         BULLET_TARGET("bullet_target");
 
