@@ -47,7 +47,7 @@ public class BulletModifierAffix extends Affix {
     protected final int stackingLimit;
 
     public BulletModifierAffix(MobEffect effect, Target target, Map<LootRarity, EffectData> values, Set<LootCategory> types, boolean stackOnReapply, int stackingLimit) {
-        super(AffixType.POTION);
+        super(AffixType.ABILITY);
         this.effect = effect;
         this.target = target;
         this.values = values;

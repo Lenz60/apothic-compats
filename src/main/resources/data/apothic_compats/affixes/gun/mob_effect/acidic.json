@@ -1,1 +1,33 @@
-{"forge:conditions":[{"type":"forge:mod_loaded","modid":"irons_artifice"}],"type":"apothic_compats:bullet_mob_effect","mob_effect":"apothic_attributes:sundering","stack_on_reapply":true,"stacking_limit":4,"target":"BULLET_TARGET","types":["gun"],"values":{"rare":{"duration":{"step":20,"min":80,"steps":3},"cooldown":40,"amplifier":0},"epic":{"duration":{"step":20,"min":80,"steps":4},"cooldown":40,"amplifier":0.25},"mythic":{"duration":{"step":20,"min":80,"steps":4},"cooldown":40,"amplifier":0}},"definition":{"affix_type":"basic_effect","exclusive_set":[],"weights":{"quality":0.1,"weight":25}}}
+{
+  "forge:conditions": [
+    { "type": "forge:mod_loaded", "modid": "irons_artifice" }
+  ],
+  "type": "apothic_compats:bullet_mob_effect",
+  "mob_effect": "attributeslib:sundering",
+  "stack_on_reapply": true,
+  "stacking_limit": 4,
+  "target": "BULLET_TARGET",
+  "types": ["gun"],
+  "values": {
+    "rare": {
+      "duration": { "step": 20, "min": 80, "steps": 3 },
+      "cooldown": 40,
+      "amplifier": 0
+    },
+    "epic": {
+      "duration": { "step": 20, "min": 80, "steps": 4 },
+      "cooldown": 40,
+      "amplifier": 0.25
+    },
+    "mythic": {
+      "duration": { "step": 20, "min": 80, "steps": 4 },
+      "cooldown": 40,
+      "amplifier": 0
+    }
+  },
+  "definition": {
+    "affix_type": "basic_effect",
+    "exclusive_set": [],
+    "weights": { "quality": 0.1, "weight": 25 }
+  }
+}
