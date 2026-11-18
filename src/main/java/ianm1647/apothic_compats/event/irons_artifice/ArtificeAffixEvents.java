@@ -26,8 +26,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ArtificeAffixEvents {
 
-    /** How long (in ticks) to keep in-ground Arrow Volley arrows before despawning them (3 seconds = 60 ticks). */
-    private static final int DESPAWN_DELAY_TICKS = 60;
+    /**
+     * How long (in ticks) to keep in-ground Arrow Volley arrows before despawning
+     * them (3 seconds = 60 ticks).
+     */
+    private static final int DESPAWN_DELAY_TICKS = 20;
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void gunShootEvents(ComposeShotEvent e) {
@@ -56,7 +59,8 @@ public class ArtificeAffixEvents {
         // Extract the entity the bullet hit (works at gun range, not melee reach)
         LivingEntity target = null;
         HitResult hitResult = e.getRayTraceResult();
-        if (hitResult != null && hitResult.getType() == HitResult.Type.ENTITY && hitResult instanceof EntityHitResult ehr) {
+        if (hitResult != null && hitResult.getType() == HitResult.Type.ENTITY
+                && hitResult instanceof EntityHitResult ehr) {
             if (ehr.getEntity() instanceof LivingEntity livingTarget) {
                 target = livingTarget;
             }
@@ -85,7 +89,8 @@ public class ArtificeAffixEvents {
     }
 
     /**
-     * Removes in-ground {@link SmallMagicArrow} projectiles owned by the given player
+     * Removes in-ground {@link SmallMagicArrow} projectiles owned by the given
+     * player
      * once {@link MagicalBulletAffix#LAST_VOLLEY_CAST_TICK_KEY} indicates the last
      * Arrow Volley cast is older than {@link #DESPAWN_DELAY_TICKS}.
      */
