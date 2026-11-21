@@ -10,6 +10,7 @@ import io.redspace.irons_artifice.api.BulletImpactEvent;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
 import io.redspace.irons_artifice.entity.Bullet;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -39,7 +40,7 @@ public class ArtificeAffixEvents {
         BulletModifierAffix.onBulletImpact(e);
 
         Bullet bullet = e.getBullet();
-        if (bullet == null || bullet.getOwner() == null || !(bullet.getOwner() instanceof LivingEntity shooter)) {
+        if (bullet == null || !(bullet.getOwner() instanceof ServerPlayer shooter)) {
             return;
         }
 
