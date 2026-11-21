@@ -24,6 +24,10 @@ public class ModAffixRegistry {
             AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("infinite_ammo"), InfiniteAmmoAffix.CODEC);
             AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("double_shot"), MultiShotAffix.CODEC);
             AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("magic_bullet"), MagicalBulletAffix.CODEC);
+            AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("fortify"), FortifyAffix.CODEC);
+            AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("oakskin"), OakskinAffix.CODEC);
+            AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("charge"), ChargeAffix.CODEC);
+            AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("hex"), HexAffix.CODEC);
         }
         if (ModList.get().isLoaded("malum")) {
             AffixRegistry.INSTANCE.registerCodec(ApothicCompats.loc("scythe_cleaving"), ScytheCleavingAffix.CODEC);
